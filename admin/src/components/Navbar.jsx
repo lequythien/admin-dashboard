@@ -20,7 +20,7 @@ import {
   MdOutlineDashboardCustomize,
   MdOutlineShoppingCart,
 } from "react-icons/md";
-import { FaBell as FaRegBell } from "react-icons/fa6";
+import { FaBell } from "react-icons/fa6"; // Sử dụng FaBell thay vì alias FaRegBell
 import icon_spanish from "../assets/images/spanish.jpg";
 import icon_german from "../assets/images/german.jpg";
 import icon_italian from "../assets/images/italian.jpg";
@@ -39,6 +39,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import LogoIconMobile from "../assets/images/logo2-admin.svg";
 import LogoIconDesktop from "../assets/images/logo-admin.png";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion"; // Thêm import framer-motion
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -149,51 +150,21 @@ export default function Navbar() {
   const isNotifMenuOpen = Boolean(notifAnchorEl);
   const isSearchMenuOpen = Boolean(searchAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
+  const handleProfileMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
-  const handleLangMenuOpen = (event) => {
-    setLangAnchorEl(event.currentTarget);
-  };
-
-  const handleLangMenuClose = () => {
-    setLangAnchorEl(null);
-  };
-
-  const handleAppsMenuOpen = (event) => {
-    setAppsAnchorEl(event.currentTarget);
-  };
-
-  const handleAppsMenuClose = () => {
-    setAppsAnchorEl(null);
-  };
-
-  const handleNotifMenuOpen = (event) => {
-    setNotifAnchorEl(event.currentTarget);
-  };
-
-  const handleNotifMenuClose = () => {
-    setNotifAnchorEl(null);
-  };
-
-  const handleSearchMenuOpen = (event) => {
+  const handleLangMenuOpen = (event) => setLangAnchorEl(event.currentTarget);
+  const handleLangMenuClose = () => setLangAnchorEl(null);
+  const handleAppsMenuOpen = (event) => setAppsAnchorEl(event.currentTarget);
+  const handleAppsMenuClose = () => setAppsAnchorEl(null);
+  const handleNotifMenuOpen = (event) => setNotifAnchorEl(event.currentTarget);
+  const handleNotifMenuClose = () => setNotifAnchorEl(null);
+  const handleSearchMenuOpen = (event) =>
     setSearchAnchorEl(event.currentTarget);
-  };
-
-  const handleSearchMenuClose = () => {
-    setSearchAnchorEl(null);
-  };
-
+  const handleSearchMenuClose = () => setSearchAnchorEl(null);
   const handleLanguageSelect = (lang) => {
     setSelectedLanguage(lang);
     handleLangMenuClose();
@@ -220,25 +191,20 @@ export default function Navbar() {
       }}
     >
       <MenuItem onClick={handleMenuClose}>
-        <LuUser className="mr-2 " />
-        Profile
+        <LuUser className="mr-2" /> Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <BiWallet className="mr-2 " />
-        My Wallet
+        <BiWallet className="mr-2" /> My Wallet
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <LuWrench className="mr-2 " />
-        Settings
+        <LuWrench className="mr-2" /> Settings
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <LuLockKeyholeOpen className="mr-2 " />
-        Lock Screen
+        <LuLockKeyholeOpen className="mr-2" /> Lock Screen
       </MenuItem>
       <hr className="border-gray-600" />
       <MenuItem onClick={handleMenuClose}>
-        <RiLogoutCircleRLine className="mr-2 text-red-400" />
-        Logout
+        <RiLogoutCircleRLine className="mr-2 text-red-400" /> Logout
       </MenuItem>
     </Menu>
   );
@@ -265,19 +231,19 @@ export default function Navbar() {
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
-            <MailIcon className="" />
+            <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={handleNotifMenuOpen}>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon className="" />
+          <Badge badgeContent={notifications.length} color="error">
+            <FaBell />
           </Badge>
         </IconButton>
         <p>Notifications</p>
@@ -286,11 +252,11 @@ export default function Navbar() {
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
+          aria-controls={menuId}
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle className="" />
+          <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -352,7 +318,7 @@ export default function Navbar() {
         sx={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gridTemplateRows: "repeat(2, auto)",
+          gap: 1,
           p: 1,
         }}
       >
@@ -473,7 +439,6 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar>
-          {/* Khu vực chứa logo */}
           <NavLink to="/">
             <Box
               sx={{
@@ -511,30 +476,10 @@ export default function Navbar() {
             </Box>
           </NavLink>
 
-          {/* Menu Icon */}
-          <div className="menu-icon-wrapper">
-            <Box
-              sx={{
-                display: { xs: "block", md: dopen ? "block" : "none" },
-                ml: { xs: 1, md: 1 },
-              }}
-            >
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={() => updateOpen(!dopen)}
-              >
-                <MenuIcon sx={{ fontSize: { xs: "1.5rem", md: "1.75rem" } }} />
-              </IconButton>
-            </Box>
-          </div>
-
-          {/* Menu Icon (hiển thị khi sidebar mở trên desktop) */}
           <Box
             sx={{
-              display: { xs: "none", md: dopen ? "none" : "block" },
+              display: { xs: "block", md: dopen ? "block" : "none" },
+              ml: 1,
             }}
           >
             <IconButton
@@ -542,16 +487,29 @@ export default function Navbar() {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              sx={{
-                ml: 1,
-              }}
+              onClick={() => updateOpen(!dopen)}
+            >
+              <MenuIcon sx={{ fontSize: { xs: "1.5rem", md: "1.75rem" } }} />
+            </IconButton>
+          </Box>
+
+          <Box
+            sx={{
+              display: { xs: "none", md: dopen ? "none" : "block" },
+              ml: 1,
+            }}
+          >
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
               onClick={() => updateOpen(!dopen)}
             >
               <MenuIcon sx={{ fontSize: "1.75rem" }} />
             </IconButton>
           </Box>
 
-          {/* Thanh tìm kiếm (chỉ hiển thị trên màn hình lớn) */}
           <Search>
             <SearchIconWrapper>
               <BiSearchAlt />
@@ -564,16 +522,14 @@ export default function Navbar() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Các icon trên màn hình lớn */}
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
               alignItems: "center",
               gap: 1,
-              mr: 2, // Khoảng cách bên phải để không dính sát vào cạnh
+              mr: 2,
             }}
           >
-            {/* Language Dropdown */}
             <IconButton
               size="large"
               aria-label="select language"
@@ -582,9 +538,7 @@ export default function Navbar() {
               onClick={handleLangMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <img
@@ -594,7 +548,6 @@ export default function Navbar() {
               />
             </IconButton>
 
-            {/* Apps Dropdown */}
             <IconButton
               size="medium"
               aria-label="apps"
@@ -603,15 +556,12 @@ export default function Navbar() {
               onClick={handleAppsMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <MdOutlineDashboardCustomize />
             </IconButton>
 
-            {/* Notifications Dropdown */}
             <IconButton
               size="small"
               aria-label="notifications"
@@ -620,17 +570,24 @@ export default function Navbar() {
               onClick={handleNotifMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <Badge badgeContent={notifications.length} color="error">
-                <FaRegBell />
+                <motion.div
+                  animate={{ rotate: [0, 15, -15, 15, 0] }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    repeatDelay: 1,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <FaBell className="text-gray-400 text-lg" />
+                </motion.div>
               </Badge>
             </IconButton>
 
-            {/* Profile */}
             <IconButton
               size="large"
               edge="end"
@@ -639,11 +596,11 @@ export default function Navbar() {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
-              className="flex items-center space-x-2"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
               }}
             >
               <img
@@ -656,31 +613,25 @@ export default function Navbar() {
               </span>
             </IconButton>
 
-            {/* Settings Icon (hiển thị trên desktop) */}
             <IconButton
               size="small"
               color="inherit"
-              className="rotate-icon"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <IoSettingsOutline />
             </IconButton>
           </Box>
 
-          {/* Các icon trên màn hình nhỏ */}
           <Box
             sx={{
               display: { xs: "flex", md: "none" },
               alignItems: "center",
               gap: 1,
-              mr: 1, // Khoảng cách bên phải trên mobile
+              mr: 1,
             }}
           >
-            {/* Icon tìm kiếm (mở dropdown trên mobile) */}
             <IconButton
               size="large"
               color="inherit"
@@ -689,15 +640,12 @@ export default function Navbar() {
               aria-haspopup="true"
               onClick={handleSearchMenuOpen}
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <BiSearchAlt />
             </IconButton>
 
-            {/* Language Dropdown */}
             <IconButton
               size="large"
               aria-label="select language"
@@ -706,9 +654,7 @@ export default function Navbar() {
               onClick={handleLangMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <img
@@ -718,7 +664,6 @@ export default function Navbar() {
               />
             </IconButton>
 
-            {/* Notifications Dropdown */}
             <IconButton
               size="small"
               aria-label="notifications"
@@ -727,17 +672,24 @@ export default function Navbar() {
               onClick={handleNotifMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <Badge badgeContent={notifications.length} color="error">
-                <FaRegBell />
+                <motion.div
+                  animate={{ rotate: [0, 15, -15, 15, 0] }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    repeatDelay: 1,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <FaBell className="text-gray-400 text-lg" />
+                </motion.div>
               </Badge>
             </IconButton>
 
-            {/* Profile */}
             <IconButton
               size="large"
               edge="end"
@@ -747,9 +699,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <img
@@ -759,15 +709,11 @@ export default function Navbar() {
               />
             </IconButton>
 
-            {/* Settings Icon (hiển thị trên mobile) */}
             <IconButton
               size="small"
               color="inherit"
-              className="rotate-icon"
               sx={{
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                },
+                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
               <IoSettingsOutline />
@@ -775,8 +721,8 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMenu}
+      {renderMobileMenu}
       {renderLangMenu}
       {renderAppsMenu}
       {renderNotifMenu}

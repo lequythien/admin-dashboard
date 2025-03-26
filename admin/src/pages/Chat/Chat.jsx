@@ -9,7 +9,6 @@ import Img_recent4 from "../images/notif-icon4.jpg";
 import Img_recent6 from "../images/notif-icon6.jpg";
 import Footer from "../../components/Footer";
 import { motion } from "framer-motion";
-import Box from "@mui/material/Box";
 
 const Chat = () => {
   const [activeTab, setActiveTab] = useState("Chat");
