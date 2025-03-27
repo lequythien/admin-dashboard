@@ -11,7 +11,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useAppStore } from "../redux/appStore";
 import { LuLockKeyholeOpen, LuUser, LuWrench } from "react-icons/lu";
 import { RiArrowDropDownLine, RiLogoutCircleRLine } from "react-icons/ri";
@@ -20,7 +19,7 @@ import {
   MdOutlineDashboardCustomize,
   MdOutlineShoppingCart,
 } from "react-icons/md";
-import { FaBell } from "react-icons/fa6"; // Sử dụng FaBell thay vì alias FaRegBell
+import { FaBell } from "react-icons/fa6";
 import icon_spanish from "../assets/images/spanish.jpg";
 import icon_german from "../assets/images/german.jpg";
 import icon_italian from "../assets/images/italian.jpg";
@@ -39,12 +38,15 @@ import { IoSettingsOutline } from "react-icons/io5";
 import LogoIconMobile from "../assets/images/logo2-admin.svg";
 import LogoIconDesktop from "../assets/images/logo-admin.png";
 import { NavLink } from "react-router-dom";
-import { motion } from "framer-motion"; // Thêm import framer-motion
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
   backgroundColor: "#262b3c",
-  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  boxShadow: "0 0px 0px rgba(0, 0, 0, 0.1)",
 }));
 
 const Search = styled("div")(({ theme }) => ({
@@ -87,11 +89,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const languages = [
-  { name: "Spanish", icon: icon_spanish },
-  { name: "German", icon: icon_german },
-  { name: "Italian", icon: icon_italian },
-  { name: "Russian", icon: icon_russian },
-  { name: "English", icon: icon_english },
+  { name: "Spanish", icon: icon_spanish, code: "es" },
+  { name: "German", icon: icon_german, code: "de" },
+  { name: "Italian", icon: icon_italian, code: "it" },
+  { name: "Russian", icon: icon_russian, code: "ru" },
+  { name: "English", icon: icon_english, code: "en" },
 ];
 
 const apps = [
@@ -106,7 +108,7 @@ const apps = [
 const notifications = [
   {
     icon: <MdOutlineShoppingCart className="text-xl" />,
-    title: "YOUR ORDER IS PLACED",
+    title: "yourOrderIsPlaced",
     description: "If several languages coalesce the grammar",
     time: "3 min ago",
     avatar: null,
@@ -119,7 +121,7 @@ const notifications = [
   },
   {
     icon: <BiWallet className="text-xl" />,
-    title: "YOUR ITEM IS SHIPPED",
+    title: "yourItemIsShipped",
     description: "If several languages coalesce the",
     time: "3 hour ago",
     avatar: null,
@@ -133,6 +135,7 @@ const notifications = [
 ];
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [langAnchorEl, setLangAnchorEl] = React.useState(null);
@@ -142,6 +145,7 @@ export default function Navbar() {
   const [selectedLanguage, setSelectedLanguage] = React.useState(languages[4]);
   const updateOpen = useAppStore((state) => state.updateOpen);
   const dopen = useAppStore((state) => state.dopen);
+  const isBelow900px = useMediaQuery("(max-width:900px)");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -165,8 +169,10 @@ export default function Navbar() {
   const handleSearchMenuOpen = (event) =>
     setSearchAnchorEl(event.currentTarget);
   const handleSearchMenuClose = () => setSearchAnchorEl(null);
+
   const handleLanguageSelect = (lang) => {
     setSelectedLanguage(lang);
+    i18n.changeLanguage(lang.code);
     handleLangMenuClose();
   };
 
@@ -191,20 +197,20 @@ export default function Navbar() {
       }}
     >
       <MenuItem onClick={handleMenuClose}>
-        <LuUser className="mr-2" /> Profile
+        <LuUser className="mr-2" /> {t("profile")}
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <BiWallet className="mr-2" /> My Wallet
+        <BiWallet className="mr-2" /> {t("myWallet")}
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <LuWrench className="mr-2" /> Settings
+        <LuWrench className="mr-2" /> {t("settings")}
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <LuLockKeyholeOpen className="mr-2" /> Lock Screen
+        <LuLockKeyholeOpen className="mr-2" /> {t("lockScreen")}
       </MenuItem>
       <hr className="border-gray-600" />
       <MenuItem onClick={handleMenuClose}>
-        <RiLogoutCircleRLine className="mr-2 text-red-400" /> Logout
+        <RiLogoutCircleRLine className="mr-2 text-red-400" /> {t("logout")}
       </MenuItem>
     </Menu>
   );
@@ -234,7 +240,7 @@ export default function Navbar() {
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>{t("messages")}</p>
       </MenuItem>
       <MenuItem onClick={handleNotifMenuOpen}>
         <IconButton
@@ -246,7 +252,7 @@ export default function Navbar() {
             <FaBell />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>{t("notifications")}</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -258,7 +264,7 @@ export default function Navbar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>{t("profile")}</p>
       </MenuItem>
     </Menu>
   );
@@ -366,7 +372,7 @@ export default function Navbar() {
     >
       <Box sx={{ p: 1, borderBottom: "1px solid #374151" }}>
         <span className="text-sm font-medium">
-          Notifications ({notifications.length})
+          {t("notifications")} ({notifications.length})
         </span>
       </Box>
       {notifications.map((notif, index) => (
@@ -386,7 +392,7 @@ export default function Navbar() {
               <Box sx={{ mr: 2 }}>{notif.icon}</Box>
             )}
             <Box>
-              <span className="text-sm font-medium">{notif.title}</span>
+              <span className="text-sm font-medium">{t(notif.title)}</span>
               <p className="text-xs text-gray-400">{notif.description}</p>
               <p className="text-xs text-gray-500">{notif.time}</p>
             </Box>
@@ -395,7 +401,7 @@ export default function Navbar() {
       ))}
       <Box sx={{ p: 1, borderTop: "1px solid #374151", textAlign: "center" }}>
         <a href="#" className="text-blue-400 hover:text-blue-300 text-xs">
-          View All
+          {t("viewAll")}
         </a>
       </Box>
     </Menu>
@@ -427,7 +433,7 @@ export default function Navbar() {
           <BiSearchAlt />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search…"
+          placeholder={t("searchPlaceholder")}
           inputProps={{ "aria-label": "search" }}
           sx={{ width: "100%" }}
         />
@@ -440,48 +446,48 @@ export default function Navbar() {
       <AppBar position="fixed">
         <Toolbar>
           <NavLink to="/">
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                width: { xs: "auto", md: dopen ? "14rem" : "3rem" },
-                justifyContent: { xs: "space-between", md: "center" },
-              }}
-            >
-              {/* Logo cho desktop */}
-              <div className="desktop-logo-wrapper">
-                <Box
-                  sx={{
-                    display: { xs: "none", md: "block" },
-                  }}
-                >
-                  <img
-                    src={dopen ? LogoIconDesktop : LogoIconMobile}
-                    alt="Logo Desktop"
-                    className={dopen ? "logo-sidebar" : "h-8 w-auto"}
-                  />
-                </Box>
-              </div>
-
-              {/* Logo cho mobile */}
-              <div className="mobile-logo-wrapper">
-                <Box sx={{ display: { xs: "block", md: "none" } }}>
-                  <img
-                    src={LogoIconMobile}
-                    alt="Logo Mobile"
-                    className="h-8 w-auto"
-                  />
-                </Box>
-              </div>
-            </Box>
+            <div className="flex justify-center bg-[#2a3042] w-full h-16">
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: {
+                    xs: "auto",
+                    md: dopen && !isBelow900px ? "15rem" : "4rem",
+                  },
+                  justifyContent: { xs: "space-between", md: "center" },
+                }}
+              >
+                <div className="desktop-logo-wrapper flex justify-center">
+                  <Box sx={{ display: { xs: "none", md: "block" } }}>
+                    <img
+                      src={
+                        dopen && !isBelow900px
+                          ? LogoIconDesktop
+                          : LogoIconMobile
+                      }
+                      alt="Logo Desktop"
+                      className={
+                        dopen && !isBelow900px ? "logo-sidebar" : "h-8 w-auto"
+                      }
+                    />
+                  </Box>
+                </div>
+                <div className="mobile-logo-wrapper">
+                  <Box sx={{ display: { xs: "block", md: "none" } }}>
+                    <img
+                      src={LogoIconMobile}
+                      alt="Logo Mobile"
+                      className="h-8 w-auto"
+                    />
+                  </Box>
+                </div>
+              </Box>
+            </div>
           </NavLink>
 
-          <Box
-            sx={{
-              display: { xs: "block", md: dopen ? "block" : "none" },
-              ml: 1,
-            }}
-          >
+          {/* Icon menu luôn hiển thị trên mobile và điều khiển sidebar */}
+          <Box sx={{ ml: 1 }}>
             <IconButton
               size="large"
               edge="start"
@@ -493,29 +499,12 @@ export default function Navbar() {
             </IconButton>
           </Box>
 
-          <Box
-            sx={{
-              display: { xs: "none", md: dopen ? "none" : "block" },
-              ml: 1,
-            }}
-          >
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => updateOpen(!dopen)}
-            >
-              <MenuIcon sx={{ fontSize: "1.75rem" }} />
-            </IconButton>
-          </Box>
-
           <Search>
             <SearchIconWrapper>
               <BiSearchAlt />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder={t("searchPlaceholder")}
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
@@ -620,7 +609,12 @@ export default function Navbar() {
                 "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
-              <IoSettingsOutline />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                <IoSettingsOutline />
+              </motion.div>
             </IconButton>
           </Box>
 
@@ -716,7 +710,12 @@ export default function Navbar() {
                 "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
-              <IoSettingsOutline />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              >
+                <IoSettingsOutline />
+              </motion.div>
             </IconButton>
           </Box>
         </Toolbar>

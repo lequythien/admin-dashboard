@@ -104,11 +104,11 @@ const OrderDetailsModal = ({ isOpen, onClose, transaction }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black pt-4 bg-opacity-50 z-50"
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-2 sm:px-0"
       onClick={handleBackgroundClick}
     >
       <div
-        className={`bg-[#2a3042] p-4 sm:p-6 rounded-sm shadow-lg w-[90%] sm:w-full max-w-md text-white transform transition-all duration-300 ease-in-out ${
+        className={`bg-[#2a3042] p-4 sm:p-6 rounded-sm shadow-lg w-full max-w-[90%] sm:max-w-md text-white transform transition-all duration-300 ease-in-out ${
           isOpen ? "translate-y-0 opacity-100" : "-translate-y-10 opacity-0"
         }`}
       >
@@ -126,12 +126,12 @@ const OrderDetailsModal = ({ isOpen, onClose, transaction }) => {
         <hr className="border-gray-600 mb-4" />
 
         {/* Order Info */}
-        <div className="mb-4 sm:mb-6">
-          <p className="text-xs sm:text-sm text-gray-400 mb-2">
+        <div className="mb-4 sm:mb-6 text-xs sm:text-sm">
+          <p className="text-gray-400 mb-2">
             Product ID:
             <span className="text-blue-400 ml-1">{transaction.orderId}</span>
           </p>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-gray-400">
             Billing Name:
             <span className="text-blue-400 ml-1">
               {transaction.billingName}
@@ -142,30 +142,30 @@ const OrderDetailsModal = ({ isOpen, onClose, transaction }) => {
         {/* Product List */}
         <div className="mb-4 sm:mb-6">
           <div className="flex text-xs sm:text-sm text-gray-400 mb-4">
-            <span className="w-[30%] text-left">Product</span>
-            <span className="w-[40%] text-left">Product Name</span>
-            <span className="w-[30%] text-right">Price</span>
+            <span className="w-[30%] sm:w-[25%] text-left">Product</span>
+            <span className="w-[40%] sm:w-[50%] text-left">Product Name</span>
+            <span className="w-[30%] sm:w-[25%] text-right">Price</span>
           </div>
 
           {transaction.products.map((product, index) => (
             <React.Fragment key={index}>
               <div className="flex items-center mb-4">
-                <div className="w-[30%]">
+                <div className="w-[30%] sm:w-[25%]">
                   <img
                     src={product.name.includes("Headphone") ? Img1 : Img2}
                     alt={product.name}
                     className="w-8 h-8 sm:w-10 sm:h-10 rounded"
                   />
                 </div>
-                <div className="w-[40%] mx-2 sm:mx-4">
+                <div className="w-[40%] sm:w-[50%] mx-2 sm:mx-4">
                   <p className="text-xs sm:text-sm font-medium">
                     {product.name}
                   </p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-[10px] sm:text-xs text-gray-400">
                     {product.price} x {product.quantity}
                   </p>
                 </div>
-                <div className="w-[30%] text-right">
+                <div className="w-[30%] sm:w-[25%] text-right">
                   <p className="text-xs sm:text-sm font-medium">
                     $
                     {(
@@ -207,7 +207,7 @@ const OrderDetailsModal = ({ isOpen, onClose, transaction }) => {
         <div className="mt-4 sm:mt-6 flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs sm:text-sm font-medium"
+            className="px-3 sm:px-4 py-1.5 bg-gray-600 text-white rounded hover:bg-gray-700 text-xs sm:text-sm font-medium"
           >
             Close
           </button>
@@ -233,91 +233,128 @@ const LatestTransaction = () => {
   };
 
   return (
-    <div className="py-6">
-      <div className="bg-[#2a3042] p-4 sm:p-6 rounded-md shadow-lg">
-        <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-white">
+    <div className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#2a3042] p-4 sm:p-6 rounded-md">
+        <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">
           Latest Transaction
         </h2>
-        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
-          <table className="w-full text-left min-w-[600px]">
-            <thead>
-              <tr className="text-gray-400 bg-[#32394e] text-xs sm:text-sm uppercase">
-                <th className="p-2 sm:p-3">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox h-3 w-3 border border-gray-600 rounded-sm text-blue-500 bg-transparent"
-                  />
-                </th>
-                <th className="p-2 sm:p-3 min-w-[100px]">Order ID</th>
-                <th className="p-2 sm:p-3 min-w-[120px]">Billing Name</th>
-                <th className="p-2 sm:p-3 min-w-[100px]">Date</th>
-                <th className="p-2 sm:p-3 min-w-[80px]">Total</th>
-                <th className="p-2 sm:p-3 min-w-[120px]">Payment Status</th>
-                <th className="p-2 sm:p-3 min-w-[120px]">Payment Method</th>
-                <th className="p-2 sm:p-3 min-w-[120px]">View Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.map((transaction, index) => (
-                <React.Fragment key={index}>
-                  <tr className="hover:bg-[#32394e] text-xs sm:text-sm">
-                    <td className="p-2 sm:p-3">
-                      <input
-                        type="checkbox"
-                        className="form-checkbox h-3 w-3 border border-gray-600"
-                      />
-                    </td>
-                    <td className="p-2 sm:p-3 text-blue-400 font-medium">
-                      {transaction.orderId}
-                    </td>
-                    <td className="p-2 sm:p-3 text-gray-300">
-                      {transaction.billingName}
-                    </td>
-                    <td className="p-2 sm:p-3 text-gray-300">
-                      {transaction.date}
-                    </td>
-                    <td className="p-2 sm:p-3 text-gray-300">
-                      {transaction.total}
-                    </td>
-                    <td className="p-2 sm:p-3">
-                      <span
-                        className={`px-2 py-0.5 rounded text-xs font-semibold uppercase ${
-                          transaction.paymentStatus === "Paid"
-                            ? "text-[#34C38F] bg-[#34C38F2e]"
-                            : transaction.paymentStatus === "Refund"
-                            ? "text-[#f1b44c] bg-[#f1b44c2e]"
-                            : "text-[#f46a6a] bg-[#f46a6a2e]"
-                        }`}
-                      >
-                        {transaction.paymentStatus}
-                      </span>
-                    </td>
-                    <td className="p-2 sm:p-3 flex items-center gap-2 text-gray-300">
-                      <span className="text-lg">
-                        {paymentMethodIcons[transaction.paymentMethod]}
-                      </span>
-                      <span>{transaction.paymentMethod}</span>
-                    </td>
-                    <td className="p-2 sm:p-3">
-                      <button
-                        onClick={() => handleViewDetails(transaction)}
-                        className="px-3 sm:px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-xs font-medium"
-                      >
-                        View Details
-                      </button>
-                    </td>
-                  </tr>
-                  {index < transactions.length - 1 && (
-                    <tr>
-                      <td colSpan="8" className="p-0">
-                        <hr className="border-t border-gray-600" />
+        <div className="relative overflow-x-auto">
+          {/* Thanh trượt tùy chỉnh */}
+          <style>
+            {`
+              .custom-scrollbar::-webkit-scrollbar {
+                height: 6px;
+              }
+              .custom-scrollbar::-webkit-scrollbar-track {
+                background: #4a5065;
+                border-radius: 10px;
+              }
+              .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #6b7280;
+                border-radius: 10px;
+              }
+              .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: #9ca3af;
+              }
+              /* Mũi tên tùy chỉnh */
+              .custom-scrollbar-container {
+                position: relative;
+              }
+              .custom-scrollbar-container::-webkit-scrollbar-button:horizontal:decrement {
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>') no-repeat center;
+                background-size: 10px;
+                width: 16px;
+                height: 16px;
+              }
+              .custom-scrollbar-container::-webkit-scrollbar-button:horizontal:increment {
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>') no-repeat center;
+                background-size: 10px;
+                width: 16px;
+                height: 16px;
+              }
+            `}
+          </style>
+          <div className="custom-scrollbar-container overflow-x-auto custom-scrollbar">
+            <table className="w-full text-left table-auto min-w-[800px]">
+              <thead>
+                <tr className="text-gray-400 bg-[#32394e] text-[10px] sm:text-xs md:text-sm uppercase whitespace-nowrap">
+                  <th className="p-2 sm:p-3">
+                    <input
+                      type="checkbox"
+                      className="form-checkbox h-3 w-3 border border-gray-600 rounded-sm text-blue-500 bg-transparent"
+                    />
+                  </th>
+                  <th className="p-2 sm:p-3">Order ID</th>
+                  <th className="p-2 sm:p-3">Billing Name</th>
+                  <th className="p-2 sm:p-3">Date</th>
+                  <th className="p-2 sm:p-3">Total</th>
+                  <th className="p-2 sm:p-3">Payment Status</th>
+                  <th className="p-2 sm:p-3">Payment Method</th>
+                  <th className="p-2 sm:p-3">View Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((transaction, index) => (
+                  <React.Fragment key={index}>
+                    <tr className="hover:bg-[#32394e] text-[10px] sm:text-xs md:text-sm whitespace-nowrap">
+                      <td className="p-2 sm:p-3">
+                        <input
+                          type="checkbox"
+                          className="form-checkbox h-3 w-3 border border-gray-600"
+                        />
+                      </td>
+                      <td className="p-2 sm:p-3 text-blue-400 font-medium">
+                        {transaction.orderId}
+                      </td>
+                      <td className="p-2 sm:p-3 text-gray-300">
+                        {transaction.billingName}
+                      </td>
+                      <td className="p-2 sm:p-3 text-gray-300">
+                        {transaction.date}
+                      </td>
+                      <td className="p-2 sm:p-3 text-gray-300">
+                        {transaction.total}
+                      </td>
+                      <td className="p-2 sm:p-3">
+                        <span
+                          className={`px-1 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs font-semibold uppercase ${
+                            transaction.paymentStatus === "Paid"
+                              ? "text-[#34C38F] bg-[#34C38F2e]"
+                              : transaction.paymentStatus === "Refund"
+                              ? "text-[#f1b44c] bg-[#f1b44c2e]"
+                              : "text-[#f46a6a] bg-[#f46a6a2e]"
+                          }`}
+                        >
+                          {transaction.paymentStatus}
+                        </span>
+                      </td>
+                      <td className="p-2 sm:p-3 flex items-center gap-1 sm:gap-2 text-gray-300">
+                        <span className="text-base sm:text-lg">
+                          {paymentMethodIcons[transaction.paymentMethod]}
+                        </span>
+                        <span>{transaction.paymentMethod}</span>
+                      </td>
+                      <td className="p-2 sm:p-3">
+                        <button
+                          onClick={() => handleViewDetails(transaction)}
+                          className="px-2 sm:px-3 md:px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-[10px] sm:text-xs font-medium"
+                        >
+                          View Details
+                        </button>
                       </td>
                     </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
+                    {index < transactions.length - 1 && (
+                      <tr>
+                        <td colSpan="8" className="p-0">
+                          <hr className="border-t border-gray-600" />
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

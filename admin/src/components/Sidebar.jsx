@@ -19,6 +19,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { BiChat, BiHomeCircle } from "react-icons/bi";
 import { IoListSharp } from "react-icons/io5";
 import { useAppStore } from "../redux/appStore";
+import { useTranslation } from "react-i18next";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const drawerWidth = 240;
 
@@ -58,7 +60,6 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
-  backgroundColor: "#2a3042",
   "& .MuiDrawer-paper": {
     backgroundColor: "#2a3042",
     color: "#fff",
@@ -82,26 +83,39 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Sidebar() {
+  const { t } = useTranslation();
   const theme = useTheme();
   const [tablesOpen, setTablesOpen] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const open = useAppStore((state) => state.dopen);
+  const updateOpen = useAppStore((state) => state.updateOpen);
+  const isBelow900px = useMediaQuery("(max-width:900px)");
 
   const handleTablesClick = () => {
     setTablesOpen(!tablesOpen);
   };
 
-  // Hàm kiểm tra xem item có đang active không
   const isActive = (path) => location.pathname === path;
+
+  const handleDrawerClose = () => {
+    updateOpen(false); // Đóng sidebar khi nhấp vào nút Chevron hoặc ngoài sidebar
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <Box height={30} />
-      <Drawer variant="permanent" open={open}>
+      <Drawer
+        variant={isBelow900px ? "temporary" : "permanent"}
+        open={open} // Trạng thái mở dựa trên store
+        onClose={handleDrawerClose} // Đóng khi nhấp ngoài trên mobile
+        ModalProps={{
+          keepMounted: true, // Giữ sidebar trong DOM để cải thiện hiệu suất
+        }}
+      >
         <DrawerHeader>
-          <IconButton>
+          <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon sx={{ color: "#fff" }} />
             ) : (
@@ -112,7 +126,7 @@ export default function Sidebar() {
         <List>
           {open && (
             <ListSubheader sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}>
-              MENU
+              {t("menu")}
             </ListSubheader>
           )}
 
@@ -135,14 +149,15 @@ export default function Sidebar() {
                 },
               },
             }}
-            onClick={() => navigate("/dashboard")}
+            onClick={() => {
+              navigate("/dashboard");
+              if (isBelow900px) updateOpen(false); // Đóng sidebar sau khi nhấp trên mobile
+            }}
           >
             <ListItemButton
               sx={[
                 { minHeight: 48, px: 2.5 },
-                open
-                  ? { justifyContent: "initial" }
-                  : { justifyContent: "center" },
+                open ? { justifyContent: "initial" } : { justifyContent: "center" },
               ]}
             >
               <ListItemIcon
@@ -155,7 +170,7 @@ export default function Sidebar() {
                 <BiHomeCircle className="text-xl" />
               </ListItemIcon>
               <ListItemText
-                primary="Dashboard"
+                primary={t("dashboard")}
                 sx={[
                   open ? { opacity: 1 } : { opacity: 0 },
                   { color: isActive("/dashboard") ? "#fff" : "#a6b0cf" },
@@ -166,7 +181,7 @@ export default function Sidebar() {
 
           {open && (
             <ListSubheader sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}>
-              APPS
+              {t("apps")}
             </ListSubheader>
           )}
 
@@ -189,14 +204,15 @@ export default function Sidebar() {
                 },
               },
             }}
-            onClick={() => navigate("/chat")}
+            onClick={() => {
+              navigate("/chat");
+              if (isBelow900px) updateOpen(false); // Đóng sidebar sau khi nhấp trên mobile
+            }}
           >
             <ListItemButton
               sx={[
                 { minHeight: 48, px: 2.5 },
-                open
-                  ? { justifyContent: "initial" }
-                  : { justifyContent: "center" },
+                open ? { justifyContent: "initial" } : { justifyContent: "center" },
               ]}
             >
               <ListItemIcon
@@ -209,7 +225,7 @@ export default function Sidebar() {
                 <BiChat className="text-xl" />
               </ListItemIcon>
               <ListItemText
-                primary="Chat"
+                primary={t("chat")}
                 sx={[
                   open ? { opacity: 1 } : { opacity: 0 },
                   { color: isActive("/chat") ? "#fff" : "#a6b0cf" },
@@ -220,7 +236,7 @@ export default function Sidebar() {
 
           {open && (
             <ListSubheader sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}>
-              COMPONENTS
+              {t("components")}
             </ListSubheader>
           )}
 
@@ -247,9 +263,7 @@ export default function Sidebar() {
             <ListItemButton
               sx={[
                 { minHeight: 48, px: 2.5 },
-                open
-                  ? { justifyContent: "initial" }
-                  : { justifyContent: "center" },
+                open ? { justifyContent: "initial" } : { justifyContent: "center" },
               ]}
               onClick={handleTablesClick}
             >
@@ -263,7 +277,7 @@ export default function Sidebar() {
                 <IoListSharp className="text-xl" />
               </ListItemIcon>
               <ListItemText
-                primary="Tables"
+                primary={t("tables")}
                 sx={[
                   open ? { opacity: 1 } : { opacity: 0 },
                   { color: isActive("/data-tables") ? "#fff" : "#a6b0cf" },
@@ -271,17 +285,9 @@ export default function Sidebar() {
               />
               {open &&
                 (tablesOpen ? (
-                  <ExpandLess
-                    sx={{
-                      color: isActive("/data-tables") ? "#fff" : "#a6b0cf",
-                    }}
-                  />
+                  <ExpandLess sx={{ color: isActive("/data-tables") ? "#fff" : "#a6b0cf" }} />
                 ) : (
-                  <ExpandMore
-                    sx={{
-                      color: isActive("/data-tables") ? "#fff" : "#a6b0cf",
-                    }}
-                  />
+                  <ExpandMore sx={{ color: isActive("/data-tables") ? "#fff" : "#a6b0cf" }} />
                 ))}
             </ListItemButton>
           </ListItem>
@@ -297,7 +303,10 @@ export default function Sidebar() {
                     "& .MuiListItemText-root": { color: "#fff" },
                   },
                 }}
-                onClick={() => navigate("/data-tables")}
+                onClick={() => {
+                  navigate("/data-tables");
+                  if (isBelow900px) updateOpen(false); // Đóng sidebar sau khi nhấp trên mobile
+                }}
               >
                 <ListItemButton
                   sx={[
@@ -306,7 +315,7 @@ export default function Sidebar() {
                   ]}
                 >
                   <ListItemText
-                    primary="Data Tables"
+                    primary={t("dataTables")}
                     sx={[
                       open ? { opacity: 1 } : { opacity: 0 },
                       { color: isActive("/data-tables") ? "#fff" : "#a6b0cf" },

@@ -27,9 +27,21 @@ const Chat = () => {
       status: "pending",
       messages: [
         { sender: "Steven Franklin", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Steven Franklin", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Steven Franklin",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Steven Franklin", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -40,9 +52,17 @@ const Chat = () => {
       avatar: Img_recent2,
       status: "online",
       messages: [
-        { sender: "Adam Miller", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
+        {
+          sender: "Adam Miller",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
         { sender: "You", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "Adam Miller", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "Adam Miller",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
       ],
     },
     {
@@ -52,8 +72,16 @@ const Chat = () => {
       avatar: "",
       status: "online",
       messages: [
-        { sender: "Keith Gonzales", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "Keith Gonzales",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Keith Gonzales", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -76,7 +104,11 @@ const Chat = () => {
       status: "offline",
       messages: [
         { sender: "Mitchel Givens", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Mitchel Givens", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -88,9 +120,21 @@ const Chat = () => {
       status: "online",
       messages: [
         { sender: "Stephen Hadley", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Stephen Hadley", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Stephen Hadley",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
       ],
     },
     {
@@ -101,9 +145,21 @@ const Chat = () => {
       status: "online",
       messages: [
         { sender: "Keith Gonzales", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Keith Gonzales", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Keith Gonzales",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Keith Gonzales", text: "Wow that's great", time: "10:07" },
         { sender: "Keith Gonzales", text: "Wow that's great", time: "10:07" },
       ],
@@ -116,9 +172,21 @@ const Chat = () => {
       initial: "G",
       messages: [
         { sender: "Steven Franklin", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Steven Franklin", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Steven Franklin",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Steven Franklin", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -126,17 +194,33 @@ const Chat = () => {
       name: "Reporting",
       initial: "R",
       messages: [
-        { sender: "Adam Miller", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
+        {
+          sender: "Adam Miller",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
         { sender: "You", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "Adam Miller", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "Adam Miller",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
       ],
     },
     {
       name: "Meeting",
       initial: "M",
       messages: [
-        { sender: "Keith Gonzales", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "11:06" },
+        {
+          sender: "Keith Gonzales",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "11:06",
+        },
         { sender: "Keith Gonzales", text: "Wow that's great", time: "11:07" },
       ],
     },
@@ -153,7 +237,11 @@ const Chat = () => {
       initial: "B",
       messages: [
         { sender: "Mitchel Givens", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Mitchel Givens", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -166,9 +254,21 @@ const Chat = () => {
       status: "online",
       messages: [
         { sender: "Steven Franklin", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Steven Franklin", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Steven Franklin",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Steven Franklin", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -177,9 +277,17 @@ const Chat = () => {
       initial: "A",
       status: "offline",
       messages: [
-        { sender: "Adam Miller", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
+        {
+          sender: "Adam Miller",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
         { sender: "You", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "Adam Miller", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "Adam Miller",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
       ],
     },
     {
@@ -187,8 +295,16 @@ const Chat = () => {
       initial: "B",
       status: "pending",
       messages: [
-        { sender: "Keith Gonzales", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "11:06" },
+        {
+          sender: "Keith Gonzales",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "11:06",
+        },
         { sender: "Keith Gonzales", text: "Wow that's great", time: "11:07" },
       ],
     },
@@ -207,7 +323,11 @@ const Chat = () => {
       status: "online",
       messages: [
         { sender: "Mitchel Givens", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Mitchel Givens", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -217,9 +337,21 @@ const Chat = () => {
       status: "offline",
       messages: [
         { sender: "Stephen Hadley", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Stephen Hadley", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Stephen Hadley",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
       ],
     },
     {
@@ -228,9 +360,21 @@ const Chat = () => {
       status: "online",
       messages: [
         { sender: "Keith Gonzales", text: "Good morning 😊", time: "10:00" },
-        { sender: "You", text: "Hi, How are you? What about our next meeting?", time: "10:02" },
-        { sender: "Keith Gonzales", text: "Yeah everything is fine", time: "10:06" },
-        { sender: "You", text: "& Next meeting tomorrow 10.00AM", time: "10:06" },
+        {
+          sender: "You",
+          text: "Hi, How are you? What about our next meeting?",
+          time: "10:02",
+        },
+        {
+          sender: "Keith Gonzales",
+          text: "Yeah everything is fine",
+          time: "10:06",
+        },
+        {
+          sender: "You",
+          text: "& Next meeting tomorrow 10.00AM",
+          time: "10:06",
+        },
         { sender: "Keith Gonzales", text: "Wow that's great", time: "10:07" },
       ],
     },
@@ -279,7 +423,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#222736] text-white flex flex-col">
+    <div className="w-full min-h-screen bg-[#222736] text-white flex flex-col pt-6">
       <div className="px-4 sm:px-6 pt-8 flex items-center justify-between">
         <h1 className="text-lg font-bold">CHAT</h1>
         <div className="flex items-center text-sm">
@@ -314,7 +458,11 @@ const Chat = () => {
               >
                 <motion.div
                   animate={{ rotate: [0, 15, -15, 15, 0] }}
-                  transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 1 }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    repeatDelay: 1,
+                  }}
                 >
                   <FaBell className="text-gray-400 text-lg" />
                 </motion.div>
@@ -405,8 +553,8 @@ const Chat = () => {
                           chat.status === "online"
                             ? "bg-green-500"
                             : chat.status === "pending"
-                            ? "bg-yellow-500"
-                            : "bg-gray-500"
+                              ? "bg-yellow-500"
+                              : "bg-gray-500"
                         }`}
                       />
                       {chat.avatar ? (
@@ -532,20 +680,25 @@ const Chat = () => {
                 <div className="flex items-center space-x-1">
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      (selectedChat?.status || selectedContact?.status) === "online"
+                      (selectedChat?.status || selectedContact?.status) ===
+                      "online"
                         ? "bg-green-500"
-                        : (selectedChat?.status || selectedContact?.status) === "pending"
-                        ? "bg-yellow-500"
-                        : "bg-gray-500"
+                        : (selectedChat?.status || selectedContact?.status) ===
+                            "pending"
+                          ? "bg-yellow-500"
+                          : "bg-gray-500"
                     }`}
                   />
                   <p className="text-xs text-green-500">
-                    {(selectedChat?.status || selectedContact?.status) === "online"
+                    {(selectedChat?.status || selectedContact?.status) ===
+                    "online"
                       ? "Online"
                       : (selectedChat?.status || selectedContact?.status)
                           ?.charAt(0)
                           .toUpperCase() +
-                        (selectedChat?.status || selectedContact?.status)?.slice(1)}
+                        (
+                          selectedChat?.status || selectedContact?.status
+                        )?.slice(1)}
                   </p>
                 </div>
               )}
@@ -596,7 +749,9 @@ const Chat = () => {
                 {selectedChat.messages.map((msg, idx) => (
                   <div
                     key={idx}
-                    className={msg.sender === "You" ? "text-right" : "text-left"}
+                    className={
+                      msg.sender === "You" ? "text-right" : "text-left"
+                    }
                   >
                     <div
                       className={`text-sm p-3 rounded-lg inline-block max-w-[90%] sm:max-w-md ${
@@ -619,7 +774,9 @@ const Chat = () => {
                 {selectedGroup.messages.map((msg, idx) => (
                   <div
                     key={idx}
-                    className={msg.sender === "You" ? "text-right" : "text-left"}
+                    className={
+                      msg.sender === "You" ? "text-right" : "text-left"
+                    }
                   >
                     <div
                       className={`text-sm p-3 rounded-lg inline-block max-w-[90%] sm:max-w-md ${
@@ -642,7 +799,9 @@ const Chat = () => {
                 {selectedContact.messages.map((msg, idx) => (
                   <div
                     key={idx}
-                    className={msg.sender === "You" ? "text-right" : "text-left"}
+                    className={
+                      msg.sender === "You" ? "text-right" : "text-left"
+                    }
                   >
                     <div
                       className={`text-sm p-3 rounded-lg inline-block max-w-[90%] sm:max-w-md ${
@@ -685,7 +844,9 @@ const Chat = () => {
         </div>
       </div>
 
-      <Footer />
+      <div className="pt-6">
+        <Footer />
+      </div>
     </div>
   );
 };

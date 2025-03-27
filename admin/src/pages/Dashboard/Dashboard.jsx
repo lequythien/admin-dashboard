@@ -12,7 +12,7 @@ const Dashboard = () => {
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div className="text-white bg-[#222736] min-h-screen">
-        <div className="pt-6">
+        <div className="pt-16 mx-6">
           <div className="w-full flex justify-between pb-6">
             <h1 className="font-bold">DASHBOARD</h1>
             <span className="flex text-sm">
@@ -50,11 +50,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="">
           <LatestTransaction />
         </div>
 
-        <div className="mt-6">
+        <div className="">
           <Footer />
         </div>
       </div>

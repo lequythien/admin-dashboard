@@ -191,7 +191,7 @@ export default function DataTable() {
 
   return (
     <div className="text-white h-full">
-      <div className="pt-8">
+      <div className="pt-16 mx-6">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-lg font-bold">DATA TABLE</h1>
           <div className="text-gray-400">

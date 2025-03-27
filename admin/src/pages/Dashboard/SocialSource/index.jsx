@@ -12,16 +12,16 @@ const SocialSource = () => {
             <div className="w-12 h-12 bg-[#556ee640] rounded-full flex items-center justify-center">
               <FaFacebook className="h-5 w-5 text-[#556ee6]" />
             </div>
-            <h4 className="flex text-lg font-semibold text-white mt-4">
-              Facebook - <p className="text-[#c3cbe4] ml-1">125 sales</p>
-            </h4>
+            <h5 className="flex text-lg font-semibold text-white mt-4">
+              Facebook - <p className="text-[#c3cbe4] ml-1 text-lg">125 sales</p>
+            </h5>
             <p className="text-sm text-[#c3cbe4] mt-2">
               Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut
               libero venenatis faucibus tincidunt.
             </p>
             <a
               href="#"
-              className="text-blue-400 text-sm my-4 flex items-center justify-center"
+              className="text-[#556ee6] text-sm my-4 flex items-center justify-center"
             >
               Learn more <MdOutlineNavigateNext className="ml-1" />
             </a>

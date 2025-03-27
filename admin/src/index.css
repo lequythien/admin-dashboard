@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -16,15 +16,16 @@
   line-height: 70px;
 }
 
-.rotate-icon {
-  animation: rotate 2s linear infinite;
+.css-zxdg2z {
+  padding: 0 !important;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.css-1ygil4i-MuiToolbar-root {
+  padding: 0 !important;
+}
+
+@media (min-width: 600px) {
+  .css-1ygil4i-MuiToolbar-root {
+    padding: 0 !important;
   }
 }
