@@ -17,13 +17,12 @@ const UserProfileCard = () => {
         <img
           src={bg_img}
           alt="Background Illustration"
-          className="absolute right-5 top-3 w-32 h-auto"
+          className="absolute right-2 top-3 w-36 h-auto"
         />
       </div>
 
       {/* Main Content: 2 Columns */}
       <div className="p-5 flex items-center">
-        {/* Left Column: Avatar & User Info */}
         <div className="relative flex flex-col -mt-20 ml-2">
           <img
             src={profile_img}
@@ -36,7 +35,6 @@ const UserProfileCard = () => {
           <p className="text-sm text-[#c3cbe4] tracking-wide">UI/UX Designer</p>
         </div>
 
-        {/* Right Column: Stats & Button */}
         <div className="flex flex-col items-center flex-1">
           <div className="flex space-x-7 mb-4">
             <div>

@@ -10,7 +10,7 @@ const ActivityPanel = () => {
       </h3>
       <div className="relative space-y-8">
         <div
-          className="absolute left-[10px] top-0 h-full border-gray-600"
+          className="absolute left-[10px] top-0 h-full border-gray-700"
           style={{ borderStyle: "dashed", borderWidth: "1px" }}
         ></div>
 
@@ -56,13 +56,9 @@ const ActivityPanel = () => {
               </div>
             )}
 
-            <p className="text-sm text-white min-w-[60px]">
-              {activity.date}
-            </p>
+            <p className="text-sm text-white min-w-[60px]">{activity.date}</p>
 
-            <p className="text-sm text-[#a6b0cf] flex-1">
-              {activity.text}
-            </p>
+            <p className="text-sm text-[#a6b0cf] flex-1">{activity.text}</p>
           </div>
         ))}
       </div>

@@ -239,41 +239,6 @@ const LatestTransaction = () => {
           Latest Transaction
         </h2>
         <div className="relative overflow-x-auto">
-          {/* Thanh trượt tùy chỉnh */}
-          <style>
-            {`
-              .custom-scrollbar::-webkit-scrollbar {
-                height: 6px;
-              }
-              .custom-scrollbar::-webkit-scrollbar-track {
-                background: #4a5065;
-                border-radius: 10px;
-              }
-              .custom-scrollbar::-webkit-scrollbar-thumb {
-                background: #6b7280;
-                border-radius: 10px;
-              }
-              .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-                background: #9ca3af;
-              }
-              /* Mũi tên tùy chỉnh */
-              .custom-scrollbar-container {
-                position: relative;
-              }
-              .custom-scrollbar-container::-webkit-scrollbar-button:horizontal:decrement {
-                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>') no-repeat center;
-                background-size: 10px;
-                width: 16px;
-                height: 16px;
-              }
-              .custom-scrollbar-container::-webkit-scrollbar-button:horizontal:increment {
-                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>') no-repeat center;
-                background-size: 10px;
-                width: 16px;
-                height: 16px;
-              }
-            `}
-          </style>
           <div className="custom-scrollbar-container overflow-x-auto custom-scrollbar">
             <table className="w-full text-left table-auto min-w-[800px]">
               <thead>
@@ -346,7 +311,7 @@ const LatestTransaction = () => {
                     {index < transactions.length - 1 && (
                       <tr>
                         <td colSpan="8" className="p-0">
-                          <hr className="border-t border-gray-600" />
+                          <hr className="border-t border-[#32394e]" />
                         </td>
                       </tr>
                     )}

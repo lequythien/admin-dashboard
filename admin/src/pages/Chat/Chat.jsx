@@ -506,7 +506,7 @@ const Chat = () => {
             </div>
           </div>
 
-          <hr className="border-gray-600" />
+          <hr className="border-[#32394e]" />
 
           <div className="relative py-6">
             <BiSearchAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -544,7 +544,7 @@ const Chat = () => {
                     <div
                       key={index}
                       onClick={() => handleChatSelect(chat)}
-                      className={`flex items-center gap-3 p-3 rounded-lg hover:bg-gray-600 cursor-pointer transition-colors ${
+                      className={`flex items-center gap-3 p-3 hover:bg-gray-600 cursor-pointer transition-colors border-b border-[#32394e] ${
                         selectedChat === chat ? "bg-gray-600" : ""
                       }`}
                     >
@@ -668,7 +668,7 @@ const Chat = () => {
 
         {/* Cột phải */}
         <div className="w-full lg:w-2/3 flex flex-col bg-[#2a3042] rounded-lg">
-          <div className="flex justify-between items-center px-4 py-4 border-b border-gray-600">
+          <div className="flex justify-between items-center px-4 py-4 border-b border-[#32394e]">
             <div>
               <h1 className="text-lg font-semibold">
                 {selectedChat?.name ||
@@ -828,7 +828,7 @@ const Chat = () => {
             )}
           </div>
 
-          <div className="p-4 border-t border-gray-600">
+          <div className="p-4 border-t border-[#32394e]">
             <div className="flex items-center space-x-2">
               <input
                 type="text"
