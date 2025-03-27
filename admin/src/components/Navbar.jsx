@@ -145,7 +145,7 @@ export default function Navbar() {
   const [selectedLanguage, setSelectedLanguage] = React.useState(languages[4]);
   const updateOpen = useAppStore((state) => state.updateOpen);
   const dopen = useAppStore((state) => state.dopen);
-  const isBelow900px = useMediaQuery("(max-width:900px)");
+  const isBelow992px = useMediaQuery("(max-width:992px)");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -453,7 +453,7 @@ export default function Navbar() {
                   alignItems: "center",
                   width: {
                     xs: "auto",
-                    md: dopen && !isBelow900px ? "15rem" : "4rem",
+                    md: dopen && !isBelow992px ? "15rem" : "4rem",
                   },
                   justifyContent: { xs: "space-between", md: "center" },
                 }}
@@ -462,13 +462,13 @@ export default function Navbar() {
                   <Box sx={{ display: { xs: "none", md: "block" } }}>
                     <img
                       src={
-                        dopen && !isBelow900px
+                        dopen && !isBelow992px
                           ? LogoIconDesktop
                           : LogoIconMobile
                       }
                       alt="Logo Desktop"
                       className={
-                        dopen && !isBelow900px ? "logo-sidebar" : "h-8 w-auto"
+                        dopen && !isBelow992px ? "logo-sidebar" : "h-8 w-auto"
                       }
                     />
                   </Box>

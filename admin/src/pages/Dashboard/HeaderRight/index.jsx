@@ -11,7 +11,6 @@ import {
 import { BiCopyAlt, BiPurchaseTagAlt } from "react-icons/bi";
 import { RiInboxArchiveLine } from "react-icons/ri";
 
-
 const weekData = [
   { name: "Jan", A: 34, B: 10, C: 11 },
   { name: "Feb", A: 55, B: 63, C: 17 },
@@ -121,20 +120,22 @@ const Dashboard = () => {
           >
             <div
               style={{
-                width: 10,
-                height: 10,
+                width: 15,
+                height: 15,
                 backgroundColor: entry.color,
                 marginRight: 5,
                 opacity: barOpacity[entry.value],
               }}
+              className="border border-white"
             />
             <span
               style={{
-                color: "white",
+                color: "#74788d",
                 opacity: barOpacity[entry.value],
               }}
+              className="text-sm"
             >
-              {entry.value}
+              Series {entry.value}
             </span>
           </div>
         ))}

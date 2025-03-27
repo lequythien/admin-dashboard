@@ -90,7 +90,7 @@ export default function Sidebar() {
   const location = useLocation();
   const open = useAppStore((state) => state.dopen);
   const updateOpen = useAppStore((state) => state.updateOpen);
-  const isBelow900px = useMediaQuery("(max-width:900px)");
+  const isBelow992px = useMediaQuery("(max-width:992px)");
 
   const handleTablesClick = () => {
     setTablesOpen(!tablesOpen);
@@ -99,7 +99,7 @@ export default function Sidebar() {
   const isActive = (path) => location.pathname === path;
 
   const handleDrawerClose = () => {
-    updateOpen(false); // Đóng sidebar khi nhấp vào nút Chevron hoặc ngoài sidebar
+    updateOpen(false);
   };
 
   return (
@@ -107,11 +107,11 @@ export default function Sidebar() {
       <CssBaseline />
       <Box height={30} />
       <Drawer
-        variant={isBelow900px ? "temporary" : "permanent"}
-        open={open} // Trạng thái mở dựa trên store
-        onClose={handleDrawerClose} // Đóng khi nhấp ngoài trên mobile
+        variant={isBelow992px ? "temporary" : "permanent"}
+        open={open}
+        onClose={handleDrawerClose}
         ModalProps={{
-          keepMounted: true, // Giữ sidebar trong DOM để cải thiện hiệu suất
+          keepMounted: true,
         }}
       >
         <DrawerHeader>
@@ -151,7 +151,7 @@ export default function Sidebar() {
             }}
             onClick={() => {
               navigate("/dashboard");
-              if (isBelow900px) updateOpen(false); // Đóng sidebar sau khi nhấp trên mobile
+              if (isBelow992px) updateOpen(false); 
             }}
           >
             <ListItemButton
@@ -206,7 +206,7 @@ export default function Sidebar() {
             }}
             onClick={() => {
               navigate("/chat");
-              if (isBelow900px) updateOpen(false); // Đóng sidebar sau khi nhấp trên mobile
+              if (isBelow992px) updateOpen(false);
             }}
           >
             <ListItemButton
@@ -305,7 +305,7 @@ export default function Sidebar() {
                 }}
                 onClick={() => {
                   navigate("/data-tables");
-                  if (isBelow900px) updateOpen(false); // Đóng sidebar sau khi nhấp trên mobile
+                  if (isBelow992px) updateOpen(false);
                 }}
               >
                 <ListItemButton
