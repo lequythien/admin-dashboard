@@ -17,12 +17,12 @@ const UserProfileCard = () => {
         <img
           src={bg_img}
           alt="Background Illustration"
-          className="absolute right-2 top-3 w-36 h-auto"
+          className="absolute right-2 top-3 w-36 h-auto md:block hidden" // Hide on mobile
         />
       </div>
 
-      {/* Main Content: 2 Columns */}
-      <div className="p-5 flex items-center">
+      {/* Main Content */}
+      <div className="p-5 flex flex-col md:flex-row items-start md:items-center">
         <div className="relative flex flex-col -mt-20 ml-2">
           <img
             src={profile_img}
@@ -35,8 +35,8 @@ const UserProfileCard = () => {
           <p className="text-sm text-[#c3cbe4] tracking-wide">UI/UX Designer</p>
         </div>
 
-        <div className="flex flex-col items-center flex-1">
-          <div className="flex space-x-7 mb-4">
+        <div className="flex flex-col items-start md:items-center md:flex-1 mt-4 md:mt-0">
+          <div className="flex flex-col md:flex-row md:space-x-7 mb-4 space-y-4 md:space-y-0">
             <div>
               <p className="text-base font-bold tracking-wide mb-2">125</p>
               <p className="text-sm text-[#c3cbe4] tracking-wide">Projects</p>
@@ -72,7 +72,7 @@ const MonthlyEarningCard = () => {
         <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
           Monthly Earning
         </h3>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-4">
           {/* Column 1: Earning Info */}
           <div className="flex-1 flex flex-col items-start">
             <div className="mb-4">
@@ -99,10 +99,10 @@ const MonthlyEarningCard = () => {
           </div>
 
           {/* Column 2: Circular Progress */}
-          <div className="flex-1 flex flex-col items-center">
+          <div className="flex-1 flex flex-col items-start md:items-center">
             <div className="relative">
               <svg width="120" height="120" className="relative">
-                {/* Vòng tròn nền (màu xám) */}
+                {/* Background Circle */}
                 <circle
                   cx="60"
                   cy="60"
@@ -111,8 +111,7 @@ const MonthlyEarningCard = () => {
                   strokeWidth={strokeWidth}
                   fill="none"
                 />
-
-                {/* Vòng tròn tiến độ */}
+                {/* Progress Circle */}
                 <circle
                   cx="60"
                   cy="60"
@@ -122,10 +121,9 @@ const MonthlyEarningCard = () => {
                   fill="none"
                   strokeDasharray={strokeDasharray}
                   strokeDashoffset={strokeDashoffset}
-                  transform="rotate(90 60 60)" // Xoay ngược để bắt đầu từ đỉnh
+                  transform="rotate(90 60 60)"
                 />
               </svg>
-
               {/* Centered Text */}
               <Box
                 sx={{
@@ -144,14 +142,14 @@ const MonthlyEarningCard = () => {
                 </p>
               </Box>
             </div>
-            <p className="text-sm font-semibold text-[#c3cbe4] text-center mt-2 tracking-wide">
+            <p className="text-sm font-semibold text-[#c3cbe4] text-left md:text-center mt-2 tracking-wide">
               Series A
             </p>
           </div>
         </div>
 
         {/* Tagline */}
-        <p className="text-sm text-[#c3cbe4] tracking-wide">
+        <p className="text-sm text-[#c3cbe4] tracking-wide mt-4">
           We craft digital, graphic and dimensional thinking.
         </p>
       </div>
