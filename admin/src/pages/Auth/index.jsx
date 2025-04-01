@@ -173,7 +173,7 @@ const Auth = () => {
               {/* Terms of Use for Registration Form */}
               {!isLogin && (
                 <p className="text-sm mb-4">
-                  By registering you agree to the Skote{" "}
+                  By registering you agree to the Skote
                   <a href="#" className="text-blue-600">
                     Terms of Use
                   </a>

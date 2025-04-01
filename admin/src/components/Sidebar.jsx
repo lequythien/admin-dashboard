@@ -125,7 +125,9 @@ export default function Sidebar() {
         </DrawerHeader>
         <List>
           {open && (
-            <ListSubheader sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}>
+            <ListSubheader
+              sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}
+            >
               {t("menu")}
             </ListSubheader>
           )}
@@ -151,13 +153,15 @@ export default function Sidebar() {
             }}
             onClick={() => {
               navigate("/dashboard");
-              if (isBelow992px) updateOpen(false); 
+              if (isBelow992px) updateOpen(false);
             }}
           >
             <ListItemButton
               sx={[
                 { minHeight: 48, px: 2.5 },
-                open ? { justifyContent: "initial" } : { justifyContent: "center" },
+                open
+                  ? { justifyContent: "initial" }
+                  : { justifyContent: "center" },
               ]}
             >
               <ListItemIcon
@@ -180,7 +184,9 @@ export default function Sidebar() {
           </ListItem>
 
           {open && (
-            <ListSubheader sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}>
+            <ListSubheader
+              sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}
+            >
               {t("apps")}
             </ListSubheader>
           )}
@@ -212,7 +218,9 @@ export default function Sidebar() {
             <ListItemButton
               sx={[
                 { minHeight: 48, px: 2.5 },
-                open ? { justifyContent: "initial" } : { justifyContent: "center" },
+                open
+                  ? { justifyContent: "initial" }
+                  : { justifyContent: "center" },
               ]}
             >
               <ListItemIcon
@@ -235,7 +243,9 @@ export default function Sidebar() {
           </ListItem>
 
           {open && (
-            <ListSubheader sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}>
+            <ListSubheader
+              sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}
+            >
               {t("components")}
             </ListSubheader>
           )}
@@ -263,7 +273,9 @@ export default function Sidebar() {
             <ListItemButton
               sx={[
                 { minHeight: 48, px: 2.5 },
-                open ? { justifyContent: "initial" } : { justifyContent: "center" },
+                open
+                  ? { justifyContent: "initial" }
+                  : { justifyContent: "center" },
               ]}
               onClick={handleTablesClick}
             >
@@ -285,9 +297,17 @@ export default function Sidebar() {
               />
               {open &&
                 (tablesOpen ? (
-                  <ExpandLess sx={{ color: isActive("/data-tables") ? "#fff" : "#a6b0cf" }} />
+                  <ExpandLess
+                    sx={{
+                      color: isActive("/data-tables") ? "#fff" : "#a6b0cf",
+                    }}
+                  />
                 ) : (
-                  <ExpandMore sx={{ color: isActive("/data-tables") ? "#fff" : "#a6b0cf" }} />
+                  <ExpandMore
+                    sx={{
+                      color: isActive("/data-tables") ? "#fff" : "#a6b0cf",
+                    }}
+                  />
                 ))}
             </ListItemButton>
           </ListItem>

@@ -29,3 +29,9 @@
     padding: 0 !important;
   }
 }
+
+.bg-icon-modal{
+  background: #32394e;
+  width: 72px;
+  height: 72px;
+}
