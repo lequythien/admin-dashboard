@@ -172,7 +172,7 @@ export default function Navbar() {
 
   const handleLanguageSelect = (lang) => {
     setSelectedLanguage(lang);
-    i18n.changeLanguage(lang.code);
+    i18n.changeLanguage(lang.code); // Thay đổi ngôn ngữ toàn cục
     handleLangMenuClose();
   };
 
@@ -209,9 +209,11 @@ export default function Navbar() {
         <LuLockKeyholeOpen className="mr-2" /> {t("lockScreen")}
       </MenuItem>
       <hr className="border-gray-600" />
-      <MenuItem onClick={handleMenuClose}>
-        <RiLogoutCircleRLine className="mr-2 text-red-400" /> {t("logout")}
-      </MenuItem>
+      <NavLink to="/auth">
+        <MenuItem onClick={handleMenuClose}>
+          <RiLogoutCircleRLine className="mr-2 text-red-400" /> {t("logout")}
+        </MenuItem>
+      </NavLink>
     </Menu>
   );
 
@@ -486,7 +488,6 @@ export default function Navbar() {
             </div>
           </NavLink>
 
-          {/* Icon menu luôn hiển thị trên mobile và điều khiển sidebar */}
           <Box sx={{ ml: 1 }}>
             <IconButton
               size="large"
@@ -553,7 +554,7 @@ export default function Navbar() {
 
             <IconButton
               size="small"
-              aria-label="notifications"
+              aria-label="view more.."
               aria-controls={notifMenuId}
               aria-haspopup="true"
               onClick={handleNotifMenuOpen}

@@ -4,7 +4,6 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      // Navbar translations
       profile: "Profile",
       myWallet: "My Wallet",
       settings: "Settings",
@@ -16,7 +15,6 @@ const resources = {
       yourOrderIsPlaced: "Your order is placed",
       yourItemIsShipped: "Your item is shipped",
       viewAll: "View All",
-      // Sidebar translations
       menu: "MENU",
       dashboard: "Dashboard",
       apps: "APPS",
@@ -28,7 +26,6 @@ const resources = {
   },
   es: {
     translation: {
-      // Navbar translations
       profile: "Perfil",
       myWallet: "Mi billetera",
       settings: "Configuraciones",
@@ -40,7 +37,6 @@ const resources = {
       yourOrderIsPlaced: "Tu pedido ha sido realizado",
       yourItemIsShipped: "Tu artículo ha sido enviado",
       viewAll: "Ver todo",
-      // Sidebar translations
       menu: "MENÚ",
       dashboard: "Tablero",
       apps: "APLICACIONES",
@@ -52,7 +48,6 @@ const resources = {
   },
   de: {
     translation: {
-      // Navbar translations
       profile: "Profil",
       myWallet: "Mein Portemonnaie",
       settings: "Einstellungen",
@@ -64,7 +59,6 @@ const resources = {
       yourOrderIsPlaced: "Ihre Bestellung wurde aufgegeben",
       yourItemIsShipped: "Ihr Artikel wurde versandt",
       viewAll: "Alle anzeigen",
-      // Sidebar translations
       menu: "MENÜ",
       dashboard: "Dashboard",
       apps: "APPS",
@@ -76,7 +70,6 @@ const resources = {
   },
   it: {
     translation: {
-      // Navbar translations
       profile: "Profilo",
       myWallet: "Il mio portafoglio",
       settings: "Impostazioni",
@@ -88,7 +81,6 @@ const resources = {
       yourOrderIsPlaced: "Il tuo ordine è stato effettuato",
       yourItemIsShipped: "Il tuo articolo è stato spedito",
       viewAll: "Vedi tutto",
-      // Sidebar translations
       menu: "MENU",
       dashboard: "Dashboard",
       apps: "APPS",
@@ -100,7 +92,6 @@ const resources = {
   },
   ru: {
     translation: {
-      // Navbar translations
       profile: "Профиль",
       myWallet: "Мой кошелек",
       settings: "Настройки",
@@ -112,7 +103,6 @@ const resources = {
       yourOrderIsPlaced: "Ваш заказ размещен",
       yourItemIsShipped: "Ваш товар отправлен",
       viewAll: "Посмотреть все",
-      // Sidebar translations
       menu: "МЕНЮ",
       dashboard: "Панель управления",
       apps: "ПРИЛОЖЕНИЯ",
@@ -124,15 +114,13 @@ const resources = {
   },
 };
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources,
-    lng: "en", // Ngôn ngữ mặc định
-    fallbackLng: "en",
-    interpolation: {
-      escapeValue: false,
-    },
-  });
+i18n.use(initReactI18next).init({
+  resources,
+  lng: "en", // Ngôn ngữ mặc định
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
 export default i18n;

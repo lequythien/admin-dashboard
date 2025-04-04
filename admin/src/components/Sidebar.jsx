@@ -1,26 +1,24 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
+import List from "@mui/material/List";
+import MuiDrawer from "@mui/material/Drawer";
 import Collapse from "@mui/material/Collapse";
+import ListSubheader from "@mui/material/ListSubheader";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItem from "@mui/material/ListItem";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { useNavigate, useLocation } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
+import { useAppStore } from "../redux/appStore";
 import { BiChat, BiHomeCircle } from "react-icons/bi";
 import { IoListSharp } from "react-icons/io5";
-import { useAppStore } from "../redux/appStore";
-import { useTranslation } from "react-i18next";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { BsClipboard2DataFill } from "react-icons/bs";
 
 const drawerWidth = 240;
 
@@ -45,14 +43,6 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-}));
-
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme }) => ({
@@ -63,6 +53,8 @@ const Drawer = styled(MuiDrawer, {
   "& .MuiDrawer-paper": {
     backgroundColor: "#2a3042",
     color: "#fff",
+    top: "64px",
+    height: "calc(100% - 64px)",
   },
   variants: [
     {
@@ -82,9 +74,48 @@ const Drawer = styled(MuiDrawer, {
   ],
 }));
 
+const NAVIGATION = [
+  {
+    kind: "header",
+    title: "menu",
+  },
+  {
+    segment: "dashboard",
+    title: "dashboard",
+    icon: <BiHomeCircle />,
+    path: "/dashboard",
+  },
+  {
+    kind: "header",
+    title: "apps",
+  },
+  {
+    segment: "chat",
+    title: "chat",
+    icon: <BiChat />,
+    path: "/chat",
+  },
+  {
+    kind: "header",
+    title: "components",
+  },
+  {
+    segment: "tables",
+    title: "tables",
+    icon: <IoListSharp />,
+    children: [
+      {
+        segment: "data-tables",
+        title: "dataTables",
+        icon: <BsClipboard2DataFill />,
+        path: "/data-tables",
+      },
+    ],
+  },
+];
+
 export default function Sidebar() {
   const { t } = useTranslation();
-  const theme = useTheme();
   const [tablesOpen, setTablesOpen] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -102,10 +133,132 @@ export default function Sidebar() {
     updateOpen(false);
   };
 
+  const renderMenuItem = (item) => {
+    const hasChildren = item.children && item.children.length > 0;
+
+    return (
+      <ListItem
+        key={item.segment}
+        disablePadding
+        sx={{
+          display: "block",
+          position: "relative",
+          "&:hover": {
+            "& .MuiListItemIcon-root": { color: "#fff" },
+            "& .MuiListItemText-root": {
+              opacity: 1,
+              color: "#fff",
+              position: open ? "static" : "absolute",
+              left: open ? "auto" : "60px",
+              top: open ? "auto" : "50%",
+              transform: open ? "none" : "translateY(-50%)",
+              backgroundColor: open ? "transparent" : "#3a4256",
+              padding: open ? "0" : "6px 12px",
+              borderRadius: "4px",
+              whiteSpace: "nowrap",
+              zIndex: 1300,
+            },
+          },
+        }}
+      >
+        <ListItemButton
+          sx={[
+            { minHeight: 48, px: 2.5 },
+            open ? { justifyContent: "initial" } : { justifyContent: "center" },
+            isActive(item.path),
+          ]}
+          onClick={() => {
+            if (hasChildren) {
+              handleTablesClick();
+            } else if (item.path) {
+              navigate(item.path);
+              if (isBelow992px) updateOpen(false);
+            }
+          }}
+        >
+          <ListItemIcon
+            sx={[
+              { minWidth: 0, justifyContent: "center" },
+              { color: isActive(item.path) ? "#fff" : "#a6b0cf" },
+              open ? { mr: 2 } : { mr: "auto" },
+              { fontSize: "1.2rem" },
+            ]}
+          >
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText
+            primary={t(item.title)}
+            sx={[
+              open ? { opacity: 1 } : { opacity: 0 },
+              { color: isActive(item.path) ? "#fff" : "#a6b0cf" },
+              { "& .MuiTypography-root": { fontSize: "0.95rem" } },
+            ]}
+          />
+          {hasChildren &&
+            open &&
+            (tablesOpen ? (
+              <ExpandLess sx={{ color: "#a6b0cf", fontSize: "1.25rem" }} />
+            ) : (
+              <ExpandMore sx={{ color: "#a6b0cf", fontSize: "1.25rem" }} />
+            ))}
+        </ListItemButton>
+
+        {hasChildren && (
+          <Collapse in={tablesOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {item.children.map((child) => (
+                <ListItem
+                  key={child.segment}
+                  disablePadding
+                  sx={{
+                    display: "block",
+                    "&:hover": {
+                      "& .MuiListItemText-root": { color: "#fff" },
+                    },
+                  }}
+                  onClick={() => {
+                    navigate(child.path);
+                    if (isBelow992px) updateOpen(false);
+                  }}
+                >
+                  <ListItemButton
+                    sx={[
+                      { minHeight: 48, px: 2.5 },
+                      open ? { pl: 7 } : { justifyContent: "center" },
+                      isActive(child.path),
+                    ]}
+                  >
+                    <ListItemIcon
+                      sx={[
+                        { minWidth: 0, justifyContent: "center" },
+                        { color: isActive(child.path) ? "#fff" : "#a6b0cf" },
+                        open ? { mr: 2 } : { mr: "auto" },
+                        { fontSize: "1rem" },
+                      ]}
+                    >
+                      {child.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={t(child.title)}
+                      sx={[
+                        open ? { opacity: 1 } : { opacity: 0 },
+                        { color: isActive(child.path) ? "#fff" : "#a6b0cf" },
+                        { "& .MuiTypography-root": { fontSize: "1rem" } },
+                      ]}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
+        )}
+      </ListItem>
+    );
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Box height={30} />
       <Drawer
         variant={isBelow992px ? "temporary" : "permanent"}
         open={open}
@@ -114,238 +267,45 @@ export default function Sidebar() {
           keepMounted: true,
         }}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon sx={{ color: "#fff" }} />
-            ) : (
-              <ChevronLeftIcon sx={{ color: "#fff" }} />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          {open && (
-            <ListSubheader
-              sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}
-            >
-              {t("menu")}
-            </ListSubheader>
-          )}
-
-          {/* Dashboard */}
-          <ListItem
-            disablePadding
-            sx={{
-              display: "block",
-              position: "relative",
-              "&:hover": {
-                "& .MuiListItemIcon-root": { color: "#fff" },
-                "& .MuiListItemText-root": {
-                  opacity: 1,
-                  color: "#fff",
-                  position: open ? "static" : "absolute",
-                  left: open ? "auto" : 60,
-                  borderRadius: "4px",
-                  whiteSpace: "nowrap",
-                  zIndex: 1300,
-                },
-              },
-            }}
-            onClick={() => {
-              navigate("/dashboard");
-              if (isBelow992px) updateOpen(false);
-            }}
-          >
-            <ListItemButton
-              sx={[
-                { minHeight: 48, px: 2.5 },
-                open
-                  ? { justifyContent: "initial" }
-                  : { justifyContent: "center" },
-              ]}
-            >
-              <ListItemIcon
-                sx={[
-                  { minWidth: 0, justifyContent: "center" },
-                  { color: isActive("/dashboard") ? "#fff" : "#a6b0cf" },
-                  open ? { mr: 3 } : { mr: "auto" },
-                ]}
-              >
-                <BiHomeCircle className="text-xl" />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("dashboard")}
-                sx={[
-                  open ? { opacity: 1 } : { opacity: 0 },
-                  { color: isActive("/dashboard") ? "#fff" : "#a6b0cf" },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
-
-          {open && (
-            <ListSubheader
-              sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}
-            >
-              {t("apps")}
-            </ListSubheader>
-          )}
-
-          {/* Chat */}
-          <ListItem
-            disablePadding
-            sx={{
-              display: "block",
-              position: "relative",
-              "&:hover": {
-                "& .MuiListItemIcon-root": { color: "#fff" },
-                "& .MuiListItemText-root": {
-                  opacity: 1,
-                  color: "#fff",
-                  position: open ? "static" : "absolute",
-                  left: open ? "auto" : 60,
-                  borderRadius: "4px",
-                  whiteSpace: "nowrap",
-                  zIndex: 1300,
-                },
-              },
-            }}
-            onClick={() => {
-              navigate("/chat");
-              if (isBelow992px) updateOpen(false);
-            }}
-          >
-            <ListItemButton
-              sx={[
-                { minHeight: 48, px: 2.5 },
-                open
-                  ? { justifyContent: "initial" }
-                  : { justifyContent: "center" },
-              ]}
-            >
-              <ListItemIcon
-                sx={[
-                  { minWidth: 0, justifyContent: "center" },
-                  { color: isActive("/chat") ? "#fff" : "#a6b0cf" },
-                  open ? { mr: 3 } : { mr: "auto" },
-                ]}
-              >
-                <BiChat className="text-xl" />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("chat")}
-                sx={[
-                  open ? { opacity: 1 } : { opacity: 0 },
-                  { color: isActive("/chat") ? "#fff" : "#a6b0cf" },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
-
-          {open && (
-            <ListSubheader
-              sx={{ color: "#7f8387", backgroundColor: "#2a3042" }}
-            >
-              {t("components")}
-            </ListSubheader>
-          )}
-
-          {/* Tables */}
-          <ListItem
-            disablePadding
-            sx={{
-              display: "block",
-              position: "relative",
-              "&:hover": {
-                "& .MuiListItemIcon-root": { color: "#fff" },
-                "& .MuiListItemText-root": {
-                  opacity: 1,
-                  color: "#fff",
-                  position: open ? "static" : "absolute",
-                  left: open ? "auto" : 60,
-                  borderRadius: "4px",
-                  whiteSpace: "nowrap",
-                  zIndex: 1300,
-                },
-              },
-            }}
-          >
-            <ListItemButton
-              sx={[
-                { minHeight: 48, px: 2.5 },
-                open
-                  ? { justifyContent: "initial" }
-                  : { justifyContent: "center" },
-              ]}
-              onClick={handleTablesClick}
-            >
-              <ListItemIcon
-                sx={[
-                  { minWidth: 0, justifyContent: "center" },
-                  { color: isActive("/data-tables") ? "#fff" : "#a6b0cf" },
-                  open ? { mr: 3 } : { mr: "auto" },
-                ]}
-              >
-                <IoListSharp className="text-xl" />
-              </ListItemIcon>
-              <ListItemText
-                primary={t("tables")}
-                sx={[
-                  open ? { opacity: 1 } : { opacity: 0 },
-                  { color: isActive("/data-tables") ? "#fff" : "#a6b0cf" },
-                ]}
-              />
-              {open &&
-                (tablesOpen ? (
-                  <ExpandLess
+        <Box
+          sx={{
+            display: isBelow992px && !open ? "none" : "block",
+          }}
+        >
+          <List>
+            {NAVIGATION.map((item) => {
+              if (item.kind === "header" && open) {
+                return (
+                  <ListSubheader
+                    key={item.title}
                     sx={{
-                      color: isActive("/data-tables") ? "#fff" : "#a6b0cf",
+                      color: "#7f8387",
+                      backgroundColor: "#2a3042",
+                      fontSize: "0.85rem",
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px",
                     }}
+                  >
+                    {t(item.title)}
+                  </ListSubheader>
+                );
+              }
+              if (item.kind === "divider" && open) {
+                return (
+                  <hr
+                    key={item.kind}
+                    style={{ borderColor: "#3a4256", margin: "8px 0" }}
                   />
-                ) : (
-                  <ExpandMore
-                    sx={{
-                      color: isActive("/data-tables") ? "#fff" : "#a6b0cf",
-                    }}
-                  />
-                ))}
-            </ListItemButton>
-          </ListItem>
-
-          {/* Data Tables (Dropdown) */}
-          <Collapse in={tablesOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem
-                disablePadding
-                sx={{
-                  display: "block",
-                  "&:hover": {
-                    "& .MuiListItemText-root": { color: "#fff" },
-                  },
-                }}
-                onClick={() => {
-                  navigate("/data-tables");
-                  if (isBelow992px) updateOpen(false);
-                }}
-              >
-                <ListItemButton
-                  sx={[
-                    { minHeight: 48, px: 2.5 },
-                    open ? { pl: 8 } : { justifyContent: "center" },
-                  ]}
-                >
-                  <ListItemText
-                    primary={t("dataTables")}
-                    sx={[
-                      open ? { opacity: 1 } : { opacity: 0 },
-                      { color: isActive("/data-tables") ? "#fff" : "#a6b0cf" },
-                    ]}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Collapse>
-        </List>
+                );
+              }
+              if (item.segment) {
+                return renderMenuItem(item);
+              }
+              return null;
+            })}
+          </List>
+        </Box>
       </Drawer>
     </Box>
   );
