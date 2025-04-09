@@ -128,7 +128,7 @@ const initialData = [
 
 export default function DataTable() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10); // Match the image (10 items per page)
+  const [itemsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -189,13 +189,28 @@ export default function DataTable() {
     setCurrentPage(1);
   };
 
+  // Responsive pagination: Show limited pages on mobile
+  const getPaginationRange = () => {
+    const maxVisiblePages = 5; // Hiển thị tối đa 5 nút trên desktop
+    const range = [];
+    const start = Math.max(1, currentPage - 2);
+    const end = Math.min(totalPages, start + maxVisiblePages - 1);
+
+    for (let i = start; i <= end; i++) {
+      range.push(i);
+    }
+    return range;
+  };
+
   return (
     <div className="text-white h-full">
-      <div className="pt-16 mx-6">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-lg font-bold">DATA TABLE</h1>
-          <div className="text-gray-400">
-            <a href="#" className="mr-2 text-white">
+      <div className="pt-12 sm:pt-16">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
+          <h1 className="text-base sm:text-lg md:text-xl font-bold">
+            DATA TABLE
+          </h1>
+          <div className="text-gray-400 text-xs sm:text-sm">
+            <a href="#" className="mr-2 text-white hover:underline">
               Tables
             </a>
             <span className="text-[#a6b0cf]">/ Data Table</span>
@@ -207,75 +222,85 @@ export default function DataTable() {
             placeholder={`Search ${totalItems} records...`}
             value={searchTerm}
             onChange={handleSearch}
-            className="p-1 pl-4 w-96 border border-gray-600 outline-none bg-[#2a3042] rounded-sm text-white placeholder-[#a6b0cf]"
+            className="p-2 pl-3 w-full border border-gray-600 outline-none bg-[#2a3042] rounded-sm text-xs sm:text-sm text-white placeholder-[#a6b0cf]"
           />
         </div>
-        <div className="bg-gray-800 overflow-hidden rounded-lg">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="bg-[#2a3042] text-[#a6b0cf]">
-                {[
-                  { label: "NAME", key: "name" },
-                  { label: "POSITION", key: "position" },
-                  { label: "OFFICE", key: "office" },
-                  { label: "AGE", key: "age" },
-                  { label: "START DATE", key: "startDate" },
-                  { label: "SALARY", key: "salary" },
-                ].map((column) => (
-                  <th
-                    key={column.key}
-                    className="p-3 cursor-pointer"
-                    onClick={() => handleSort(column.key)}
-                  >
-                    <div className="flex justify-between items-center">
-                      <span>{column.label}</span>
-                      <span className="inline-block align-middle">
-                        {sortConfig.key === column.key &&
-                        sortConfig.direction === "descending" ? (
-                          <TiArrowSortedUp />
-                        ) : (
-                          <TiArrowSortedDown />
-                        )}
-                      </span>
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {currentData.map((row, index) => (
-                <tr
-                  key={index}
-                  className="bg-[#2a3042] border-t border-gray-700 text-sm text-[#a6b0cf] hover:bg-gray-700"
-                >
-                  <td className="p-3">{row.name}</td>
-                  <td className="p-3">{row.position}</td>
-                  <td className="p-3">{row.office}</td>
-                  <td className="p-3">{row.age}</td>
-                  <td className="p-3">{row.startDate}</td>
-                  <td className="p-3">{row.salary}</td>
+        <div className="bg-gray-800 overflow-hidden rounded-lg shadow-lg">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="bg-[#2a3042] text-[#a6b0cf] text-xs sm:text-sm">
+                  {[
+                    { label: "NAME", key: "name" },
+                    { label: "POSITION", key: "position" },
+                    { label: "OFFICE", key: "office" },
+                    { label: "AGE", key: "age" },
+                    { label: "START DATE", key: "startDate" },
+                    { label: "SALARY", key: "salary" },
+                  ].map((column) => (
+                    <th
+                      key={column.key}
+                      className="p-2 sm:p-3 cursor-pointer whitespace-nowrap"
+                      onClick={() => handleSort(column.key)}
+                    >
+                      <div className="flex justify-between items-center">
+                        <span>{column.label}</span>
+                        <span className="inline-block align-middle">
+                          {sortConfig.key === column.key &&
+                          sortConfig.direction === "descending" ? (
+                            <TiArrowSortedUp />
+                          ) : (
+                            <TiArrowSortedDown />
+                          )}
+                        </span>
+                      </div>
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentData.map((row, index) => (
+                  <tr
+                    key={index}
+                    className="bg-[#2a3042] border-t border-gray-700 text-xs sm:text-sm text-[#a6b0cf] hover:bg-gray-700"
+                  >
+                    <td className="p-2 sm:p-3 whitespace-nowrap">{row.name}</td>
+                    <td className="p-2 sm:p-3 whitespace-nowrap">
+                      {row.position}
+                    </td>
+                    <td className="p-2 sm:p-3 whitespace-nowrap">
+                      {row.office}
+                    </td>
+                    <td className="p-2 sm:p-3 whitespace-nowrap">{row.age}</td>
+                    <td className="p-2 sm:p-3 whitespace-nowrap">
+                      {row.startDate}
+                    </td>
+                    <td className="p-2 sm:p-3 whitespace-nowrap">
+                      {row.salary}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="flex justify-between items-center mt-4 mb-6 text-gray-400">
-          <span className="text-[#a6b0cf]">
+        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center mt-4 mb-6 text-gray-400 gap-2">
+          <span className="text-xs sm:text-sm text-[#a6b0cf]">
             Showing {Math.min(endIndex, totalItems)} of {totalItems} results
           </span>
-          <div className="flex space-x-2">
+          <div className="flex space-x-1 sm:space-x-2">
             <button
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
+              className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
             >
               <IoIosArrowBack />
             </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            {getPaginationRange().map((page) => (
               <button
                 key={page}
                 onClick={() => goToPage(page)}
-                className={`px-3 py-1 rounded ${
+                className={`px-2 py-1 sm:px-3 sm:py-1 rounded text-xs sm:text-sm ${
                   currentPage === page
                     ? "bg-blue-600 text-[#c3cbe4]"
                     : "bg-gray-700 hover:bg-gray-600"
@@ -287,7 +312,7 @@ export default function DataTable() {
             <button
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
+              className="px-2 py-1 sm:px-3 sm:py-1 bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-50"
             >
               <IoIosArrowForward />
             </button>

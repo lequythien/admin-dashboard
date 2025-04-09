@@ -233,7 +233,7 @@ const LatestTransaction = () => {
   };
 
   return (
-    <div className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8">
+    <div className="py-4 sm:py-6 px-0 sm:px-0 lg:px-0">
       <div className="bg-[#2a3042] p-4 sm:p-6 rounded-md">
         <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">
           Latest Transaction
@@ -242,7 +242,7 @@ const LatestTransaction = () => {
           <div className="custom-scrollbar-container overflow-x-auto custom-scrollbar">
             <table className="w-full text-left table-auto min-w-[800px]">
               <thead>
-                <tr className="text-gray-400 bg-[#32394e] text-[10px] sm:text-xs md:text-sm uppercase whitespace-nowrap">
+                <tr className="text-[#a6b0cf] bg-[#32394e] text-[10px] sm:text-xs md:text-sm uppercase whitespace-nowrap">
                   <th className="p-2 sm:p-3">
                     <input
                       type="checkbox"
@@ -268,16 +268,16 @@ const LatestTransaction = () => {
                           className="form-checkbox h-3 w-3 border border-gray-600"
                         />
                       </td>
-                      <td className="p-2 sm:p-3 text-blue-400 font-medium">
+                      <td className="p-2 sm:p-3 text-[#a6b0cf] font-medium">
                         {transaction.orderId}
                       </td>
-                      <td className="p-2 sm:p-3 text-gray-300">
+                      <td className="p-2 sm:p-3 text-[#a6b0cf]">
                         {transaction.billingName}
                       </td>
-                      <td className="p-2 sm:p-3 text-gray-300">
+                      <td className="p-2 sm:p-3 text-[#a6b0cf]">
                         {transaction.date}
                       </td>
-                      <td className="p-2 sm:p-3 text-gray-300">
+                      <td className="p-2 sm:p-3 text-[#a6b0cf]">
                         {transaction.total}
                       </td>
                       <td className="p-2 sm:p-3">
@@ -286,14 +286,14 @@ const LatestTransaction = () => {
                             transaction.paymentStatus === "Paid"
                               ? "text-[#34C38F] bg-[#34C38F2e]"
                               : transaction.paymentStatus === "Refund"
-                              ? "text-[#f1b44c] bg-[#f1b44c2e]"
-                              : "text-[#f46a6a] bg-[#f46a6a2e]"
+                                ? "text-[#f1b44c] bg-[#f1b44c2e]"
+                                : "text-[#f46a6a] bg-[#f46a6a2e]"
                           }`}
                         >
                           {transaction.paymentStatus}
                         </span>
                       </td>
-                      <td className="p-2 sm:p-3 flex items-center gap-1 sm:gap-2 text-gray-300">
+                      <td className="p-2 sm:p-3 flex items-center gap-1 sm:gap-2 text-[#a6b0cf]">
                         <span className="text-base sm:text-lg">
                           {paymentMethodIcons[transaction.paymentMethod]}
                         </span>

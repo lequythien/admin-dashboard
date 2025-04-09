@@ -17,33 +17,41 @@ const UserProfileCard = () => {
         <img
           src={bg_img}
           alt="Background Illustration"
-          className="absolute right-2 top-3 w-36 h-auto md:block hidden" // Hide on mobile
+          className="absolute right-2 top-3 w-36 h-auto md:block hidden"
         />
       </div>
 
       {/* Main Content */}
       <div className="p-5 flex flex-col md:flex-row items-start md:items-center">
-        <div className="relative flex flex-col -mt-20 ml-2">
+        <div className="relative flex flex-col md:-mt-20 -mt-10 ml-2">
           <img
             src={profile_img}
             alt="User Avatar"
             className="w-16 h-16 rounded-full border-4 border-[#2a3042] shadow-md ml-4"
           />
-          <h2 className="mt-2 text-lg font-semibold text-white tracking-wide">
+          <h2 className="mt-2 text-lg poppins-medium text-white tracking-wide">
             Henry Price
           </h2>
-          <p className="text-sm text-[#c3cbe4] tracking-wide">UI/UX Designer</p>
+          <p className="text-sm text-[#c3cbe4] tracking-wide poppins-regular">
+            UI/UX Designer
+          </p>
         </div>
 
         <div className="flex flex-col items-start md:items-center md:flex-1 mt-4 md:mt-0">
           <div className="flex flex-col md:flex-row md:space-x-7 mb-4 space-y-4 md:space-y-0">
             <div>
-              <p className="text-base font-bold tracking-wide mb-2">125</p>
-              <p className="text-sm text-[#c3cbe4] tracking-wide">Projects</p>
+              <p className="text-base poppins-medium tracking-wide mb-2">125</p>
+              <p className="text-sm poppins-regular text-[#c3cbe4] tracking-wide">
+                Projects
+              </p>
             </div>
             <div>
-              <p className="text-base font-bold tracking-wide mb-2">$1245</p>
-              <p className="text-sm text-[#c3cbe4] tracking-wide">Revenue</p>
+              <p className="text-base poppins-medium tracking-wide mb-2">
+                $1245
+              </p>
+              <p className="text-sm poppins-regular text-[#c3cbe4] tracking-wide">
+                Revenue
+              </p>
             </div>
           </div>
 
@@ -76,10 +84,10 @@ const MonthlyEarningCard = () => {
           {/* Column 1: Earning Info */}
           <div className="flex-1 flex flex-col items-start">
             <div className="mb-4">
-              <p className="text-sm text-[#c3cbe4] mb-2 tracking-wide">
+              <p className="text-xs text-[#c3cbe4] mb-2 tracking-wide">
                 This month
               </p>
-              <p className="text-2xl font-bold text-white tracking-wide">
+              <p className="text-2xl poppins-medium text-white tracking-wide">
                 $34,252
               </p>
               <p className="text-sm mt-1">
@@ -149,7 +157,7 @@ const MonthlyEarningCard = () => {
         </div>
 
         {/* Tagline */}
-        <p className="text-sm text-[#c3cbe4] tracking-wide mt-4">
+        <p className="text-xs text-[#c3cbe4] tracking-wide mt-4">
           We craft digital, graphic and dimensional thinking.
         </p>
       </div>

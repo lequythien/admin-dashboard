@@ -44,9 +44,9 @@ const Dashboard = () => {
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div className="text-white bg-[#222736] min-h-screen">
-        <div className="pt-16 mx-6">
+        <div className="pt-16">
           <div className="w-full flex justify-between pb-6">
-            <h1 className="font-bold">DASHBOARD</h1>
+            <h1 className="poppins-semibold">DASHBOARD</h1>
             <span className="flex text-sm">
               <a href="">Dashboard</a>
               <p className="ml-1 text-[#c3cbe4]">/ Dashboard</p>
@@ -115,14 +115,14 @@ const Dashboard = () => {
                 <HiOutlineMailOpen className="text-3xl md:text-4xl text-[#556ee6]" />
               </div>
               {/* Heading */}
-              <h2 className="text-lg md:text-xl font-semibold text-[#556ee6] mb-2">
+              <h2 className="text-lg md:text-xl poppins-medium text-[#556ee6] mb-2">
                 Subscribe !
               </h2>
-              <p className="text-center text-xs sm:text-sm md:text-base font-normal text-[#c3cbe4] mb-4 md:mb-6">
+              <p className="text-center text-xs sm:text-sm md:text-base poppins-regular text-[#c3cbe4] mb-4 md:mb-6">
                 Subscribe our newsletter and get notification to stay update.
               </p>
               {/* Input and Button */}
-              <div className="w-full flex flex-col sm:flex-row items-center gap-2">
+              <div className="w-full flex flex-col sm:flex-row items-center poppins-regular gap-2">
                 <TextField
                   fullWidth
                   variant="outlined"

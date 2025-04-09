@@ -147,19 +147,19 @@ const Dashboard = () => {
     <div className="text-white">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <Card
-          className="bg-[#2a3042]"
+          className="bg-[#2a3042] poppins-medium"
           title="Orders"
           value="1,235"
           icon={<BiCopyAlt />}
         />
         <Card
-          className="bg-[#2a3042]"
+          className="bg-[#2a3042] poppins-medium"
           title="Revenue"
           value="$35,723"
           icon={<RiInboxArchiveLine />}
         />
         <Card
-          className="bg-[#2a3042]"
+          className="bg-[#2a3042] poppins-medium"
           title="Average Price"
           value="$16.2"
           icon={<BiPurchaseTagAlt />}
@@ -168,7 +168,7 @@ const Dashboard = () => {
 
       <div className="bg-[#2a3042] p-6 rounded-lg shadow-lg">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">Email Sent</h2>
+          <h2 className="text-base font-semibold">Email Sent</h2>
           <div className="flex space-x-4">
             <button
               onClick={() => {
@@ -242,12 +242,12 @@ const Card = ({ title, value, icon, className }) => (
   >
     <div>
       <h3 className="text-gray-400 text-sm">{title}</h3>
-      <p className="text-2xl font-semibold">{value}</p>
+      <p className="text-xl mt-3 font-semibold">{value}</p>
     </div>
     <div className="bg-[#556ee6] rounded-full p-3">
       <div className="text-white text-2xl">{icon}</div>
     </div>
   </div>
-);
+);  
 
 export default Dashboard;

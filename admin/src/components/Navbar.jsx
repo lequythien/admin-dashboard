@@ -172,7 +172,7 @@ export default function Navbar() {
 
   const handleLanguageSelect = (lang) => {
     setSelectedLanguage(lang);
-    i18n.changeLanguage(lang.code); // Thay đổi ngôn ngữ toàn cục
+    i18n.changeLanguage(lang.code);
     handleLangMenuClose();
   };
 

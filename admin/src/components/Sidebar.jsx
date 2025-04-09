@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import List from "@mui/material/List";
@@ -19,60 +18,6 @@ import { useAppStore } from "../redux/appStore";
 import { BiChat, BiHomeCircle } from "react-icons/bi";
 import { IoListSharp } from "react-icons/io5";
 import { BsClipboard2DataFill } from "react-icons/bs";
-
-const drawerWidth = 240;
-
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  "& .MuiDrawer-paper": {
-    backgroundColor: "#2a3042",
-    color: "#fff",
-    top: "64px",
-    height: "calc(100% - 64px)",
-  },
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        ...openedMixin(theme),
-        "& .MuiDrawer-paper": openedMixin(theme),
-      },
-    },
-    {
-      props: ({ open }) => !open,
-      style: {
-        ...closedMixin(theme),
-        "& .MuiDrawer-paper": closedMixin(theme),
-      },
-    },
-  ],
-}));
 
 const NAVIGATION = [
   {
@@ -188,6 +133,7 @@ export default function Sidebar() {
           </ListItemIcon>
           <ListItemText
             primary={t(item.title)}
+            className="poppins-regular"
             sx={[
               open ? { opacity: 1 } : { opacity: 0 },
               { color: isActive(item.path) ? "#fff" : "#a6b0cf" },
@@ -259,17 +205,33 @@ export default function Sidebar() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Drawer
+      <MuiDrawer
         variant={isBelow992px ? "temporary" : "permanent"}
         open={open}
         onClose={handleDrawerClose}
         ModalProps={{
           keepMounted: true,
         }}
+        sx={{
+          "& .MuiDrawer-paper": {
+            backgroundColor: "#2a3042",
+            width: open ? 240 : 65,
+            boxSizing: "border-box",
+            color: "#fff",
+            zIndex: isBelow992px ? 1300 : 1200,
+            position: isBelow992px ? "fixed" : "relative",
+            height: "100%",
+            transition: "width 0.3s ease",
+          },
+        }}
       >
         <Box
           sx={{
             display: isBelow992px && !open ? "none" : "block",
+            backgroundColor: "#2a3042",
+            height: "100%",
+            paddingTop: "50px",
+            overflowY: "auto",
           }}
         >
           <List>
@@ -306,7 +268,7 @@ export default function Sidebar() {
             })}
           </List>
         </Box>
-      </Drawer>
+      </MuiDrawer>
     </Box>
   );
 }
