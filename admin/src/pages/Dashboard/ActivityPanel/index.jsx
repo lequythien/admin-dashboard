@@ -8,7 +8,7 @@ const ActivityPanel = () => {
       <h3 className="text-sm font-semibold text-white uppercase mb-4">
         Activity
       </h3>
-      <div className="relative space-y-8">
+      <div className="relative space-y-10">
         <div
           className="absolute left-[10px] top-0 h-full border-gray-700"
           style={{ borderStyle: "dashed", borderWidth: "1px" }}

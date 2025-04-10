@@ -21,13 +21,13 @@ const modalStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: { xs: "90%", sm: "80%", md: 500 },
+  width: { xs: "90%", sm: "70%", md: 450 }, // Giảm chiều rộng trên mobile
   bgcolor: "#2a3042",
   borderRadius: "8px",
   border: "none",
   color: "#fff",
-  px: { xs: 4, sm: 6, md: 8 },
-  py: { xs: 4, sm: 5, md: 6 },
+  px: { xs: 3, sm: 4, md: 5 }, // Giảm padding trên mobile
+  py: { xs: 3, sm: 4, md: 5 },
 };
 
 const Dashboard = () => {
@@ -111,18 +111,18 @@ const Dashboard = () => {
             {/* Modal Content */}
             <div className="flex flex-col items-center">
               {/* Icon */}
-              <div className="bg-icon-modal mb-4 rounded-full flex justify-center items-center p-3">
+              <div className="bg-[#3a4256] mb-4 rounded-full flex justify-center items-center p-3">
                 <HiOutlineMailOpen className="text-3xl md:text-4xl text-[#556ee6]" />
               </div>
               {/* Heading */}
               <h2 className="text-lg md:text-xl poppins-medium text-[#556ee6] mb-2">
                 Subscribe !
               </h2>
-              <p className="text-center text-xs sm:text-sm md:text-base poppins-regular text-[#c3cbe4] mb-4 md:mb-6">
+              <p className="text-center text-xs sm:text-sm md:text-sm poppins-regular text-[#a6b0cf] mb-4 md:mb-6">
                 Subscribe our newsletter and get notification to stay update.
               </p>
               {/* Input and Button */}
-              <div className="w-full flex flex-col sm:flex-row items-center poppins-regular gap-2">
+              <div className="w-full flex items-center">
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -158,9 +158,8 @@ const Dashboard = () => {
                     },
                     minWidth: "40px",
                     height: "40px",
-                    borderRadius: "4px",
                     padding: 0,
-                    mt: { xs: 2, sm: 0 },
+                    flexShrink: 0,
                   }}
                 >
                   <TbSend className="text-lg md:text-xl" />

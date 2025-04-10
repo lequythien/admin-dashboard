@@ -1,7 +1,7 @@
 import React from "react";
 import bg_img from "../HeaderLeft/images/profile-img.png";
 import profile_img from "../HeaderLeft/images/avatar.jpg";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaArrowUp } from "react-icons/fa";
 import { Box } from "@mui/material";
 
 // UserProfileCard Component
@@ -91,8 +91,8 @@ const MonthlyEarningCard = () => {
                 $34,252
               </p>
               <p className="text-sm mb-4">
-                <span className="text-green-500 font-medium tracking-wide">
-                  12% ↑
+                <span className="flex text-green-500 font-medium tracking-wide">
+                  12% <FaArrowUp className="ml-1 text-xs" />
                 </span>{" "}
                 <span className="text-[#c3cbe4] tracking-wide">
                   From previous period
