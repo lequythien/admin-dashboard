@@ -73,10 +73,49 @@
   height: 72px;
 }
 
-.text-xs{
+.text-xs {
   font-size: 13px;
+  line-height: 20px;
 }
 
-.text-2xl{
+.text-sm {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.text-2xl {
   font-size: 23px;
+}
+
+.text-min-chat {
+  font-size: 11px;
+}
+
+.time-chat {
+  font-size: 12px;
+}
+
+.name-user-chat {
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.text-err-auth{
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.logo-auth{
+  height: 18px;
+  width: auto;
+}
+
+.avt-henry{
+  width: 72px;
+  height: 72px;
+}
+
+.text-view-more{
+  font-size: 11px;
+  line-height: 17px;
 }

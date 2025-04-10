@@ -111,7 +111,7 @@ const Dashboard = () => {
   const renderLegend = (props) => {
     const { payload } = props;
     return (
-      <div className="flex justify-center gap-6">
+      <div className="flex flex-wrap justify-center gap-4 mt-4">
         {payload.map((entry) => (
           <div
             key={entry.value}
@@ -133,7 +133,7 @@ const Dashboard = () => {
                 color: "#74788d",
                 opacity: barOpacity[entry.value],
               }}
-              className="text-sm"
+              className="text-xs md:text-sm"
             >
               Series {entry.value}
             </span>
@@ -144,7 +144,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="text-white">
+    <div className="text-white p-2">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <Card
           className="bg-[#2a3042] poppins-medium"
@@ -166,16 +166,16 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className="bg-[#2a3042] p-6 rounded-lg shadow-lg">
-        <div className="flex justify-between items-center mb-4">
+      <div className="bg-[#2a3042] p-4 md:p-6 rounded-lg shadow-lg">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
           <h2 className="text-base font-semibold">Email Sent</h2>
-          <div className="flex space-x-4">
+          <div className="flex space-x-2 md:space-x-4">
             <button
               onClick={() => {
                 setData(weekData);
                 setActiveView("week");
               }}
-              className={`px-4 py-2 text-sm rounded ${
+              className={`px-3 py-1 text-xs md:text-sm rounded ${
                 activeView === "week" ? "bg-[#556ee6]" : ""
               }`}
             >
@@ -186,7 +186,7 @@ const Dashboard = () => {
                 setData(monthData);
                 setActiveView("month");
               }}
-              className={`px-4 py-2 text-sm rounded ${
+              className={`px-3 py-1 text-xs md:text-sm rounded ${
                 activeView === "month" ? "bg-[#556ee6]" : ""
               }`}
             >
@@ -197,7 +197,7 @@ const Dashboard = () => {
                 setData(yearData);
                 setActiveView("year");
               }}
-              className={`px-4 py-2 text-sm rounded ${
+              className={`px-3 py-1 text-xs md:text-sm rounded ${
                 activeView === "year" ? "bg-[#556ee6]" : ""
               }`}
             >
@@ -205,10 +205,20 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data} barSize={10}>
-            <XAxis dataKey="name" stroke="#ccc" />
-            <YAxis stroke="#ccc" />
+        <ResponsiveContainer
+          width="100%"
+          height={window.innerWidth < 768 ? 200 : 300}
+        >
+          <BarChart data={data} barSize={window.innerWidth < 768 ? 5 : 10}>
+            <XAxis
+              dataKey="name"
+              stroke="#ccc"
+              tick={{ fontSize: window.innerWidth < 768 ? 10 : 12 }}
+            />
+            <YAxis
+              stroke="#ccc"
+              tick={{ fontSize: window.innerWidth < 768 ? 10 : 12 }}
+            />
             <Tooltip content={<CustomTooltip />} />
             <Legend content={renderLegend} />
             <Bar
@@ -238,16 +248,16 @@ const Dashboard = () => {
 
 const Card = ({ title, value, icon, className }) => (
   <div
-    className={`${className} p-6 rounded-lg shadow-lg flex justify-between items-center`}
+    className={`${className} p-4 md:p-6 rounded-lg shadow-lg flex justify-between items-center`}
   >
     <div>
-      <h3 className="text-gray-400 text-sm">{title}</h3>
-      <p className="text-xl mt-3 font-semibold">{value}</p>
+      <h3 className="text-gray-400 text-xs md:text-sm">{title}</h3>
+      <p className="text-lg md:text-xl mt-2 md:mt-3 font-semibold">{value}</p>
     </div>
-    <div className="bg-[#556ee6] rounded-full p-3">
-      <div className="text-white text-2xl">{icon}</div>
+    <div className="bg-[#556ee6] rounded-full p-2 md:p-3">
+      <div className="text-white text-xl md:text-2xl">{icon}</div>
     </div>
   </div>
-);  
+);
 
 export default Dashboard;

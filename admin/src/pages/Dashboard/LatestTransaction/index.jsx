@@ -302,7 +302,7 @@ const LatestTransaction = () => {
                       <td className="p-2 sm:p-3">
                         <button
                           onClick={() => handleViewDetails(transaction)}
-                          className="px-2 sm:px-3 md:px-4 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700 text-[10px] sm:text-xs font-medium"
+                          className="text-view-more poppins-regular px-2 sm:px-2 md:px-3 py-1 bg-blue-600 text-white rounded-full hover:bg-blue-700"
                         >
                           View Details
                         </button>

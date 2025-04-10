@@ -47,7 +47,7 @@ const Dashboard = () => {
         <div className="pt-16">
           <div className="w-full flex justify-between pb-6">
             <h1 className="poppins-semibold">DASHBOARD</h1>
-            <span className="flex text-sm">
+            <span className="flex text-xs">
               <a href="">Dashboard</a>
               <p className="ml-1 text-[#c3cbe4]">/ Dashboard</p>
             </span>

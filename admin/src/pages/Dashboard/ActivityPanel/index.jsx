@@ -58,14 +58,14 @@ const ActivityPanel = () => {
 
             <p className="text-sm text-white min-w-[60px]">{activity.date}</p>
 
-            <p className="text-sm text-[#a6b0cf] flex-1">{activity.text}</p>
+            <p className="text-xs text-[#a6b0cf] flex-1">{activity.text}</p>
           </div>
         ))}
       </div>
 
       {/* Nút View More */}
       <div className="mt-6 text-center">
-        <button className="px-4 py-1 bg-blue-600 text-white rounded-sm hover:bg-blue-700 text-sm font-medium flex items-center justify-center mx-auto">
+        <button className="text-view-more px-4 py-1 bg-[#556ee6] text-white rounded-sm hover:bg-blue-600 text-sm font-medium flex items-center justify-center mx-auto">
           View More
           <GrLinkNext className="ml-2 w-3 h-3" />
         </button>

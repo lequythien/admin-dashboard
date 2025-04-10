@@ -7,13 +7,13 @@ import { Box } from "@mui/material";
 // UserProfileCard Component
 const UserProfileCard = () => {
   return (
-    <div className="w-full bg-[#2a3042] rounded-xl text-white shadow-lg overflow-hidden font-sans">
+    <div className="w-full bg-[#2a3042] rounded-sm text-white shadow-lg overflow-hidden font-sans">
       {/* Header */}
-      <div className="bg-[#2A2F57] p-5 py-8 relative flex flex-col rounded-t-xl">
-        <h1 className="text-lg font-semibold text-[#556ee6] tracking-wide">
+      <div className="bg-[#34406b] p-4 pb-8 relative flex flex-col rounded-t-xl">
+        <h1 className="text-base pb-2 poppins-medium text-[#556ee6] tracking-wide">
           Welcome Back!
         </h1>
-        <p className="text-sm text-[#556ee6] tracking-wide">Skote Dashboard</p>
+        <p className="text-xs text-[#556ee6] tracking-wide">Skote Dashboard</p>
         <img
           src={bg_img}
           alt="Background Illustration"
@@ -23,16 +23,16 @@ const UserProfileCard = () => {
 
       {/* Main Content */}
       <div className="p-5 flex flex-col md:flex-row items-start md:items-center">
-        <div className="relative flex flex-col md:-mt-20 -mt-10 ml-2">
+        <div className="relative flex flex-col md:-mt-12 -mt-10">
           <img
             src={profile_img}
             alt="User Avatar"
-            className="w-16 h-16 rounded-full border-4 border-[#2a3042] shadow-md ml-4"
+            className="avt-henry rounded-full border-4 border-[#2a3042] shadow-md ml-2"
           />
-          <h2 className="mt-2 text-lg poppins-medium text-white tracking-wide">
+          <h2 className="mt-6 mb-2 name-user-chat poppins-medium text-white tracking-wide">
             Henry Price
           </h2>
-          <p className="text-sm text-[#c3cbe4] tracking-wide poppins-regular">
+          <p className="text-xs text-[#c3cbe4] tracking-wide poppins-regular">
             UI/UX Designer
           </p>
         </div>
@@ -55,7 +55,7 @@ const UserProfileCard = () => {
             </div>
           </div>
 
-          <button className="bg-[#5C67F2] hover:bg-[#4A55D2] text-white py-2 px-3 rounded-sm flex items-center transition duration-300 ease-in-out text-xs font-medium tracking-wide">
+          <button className="text-view-more bg-[#5C67F2] hover:bg-[#4A55D2] text-white py-2 px-3 rounded-sm flex items-center transition duration-300 ease-in-out text-xs font-medium tracking-wide">
             View More
             <FaArrowRight className="ml-2" />
           </button>
@@ -77,20 +77,20 @@ const MonthlyEarningCard = () => {
   return (
     <div className="w-full bg-[#2a3042] rounded-xl text-white shadow-sm overflow-hidden font-sans p-5">
       <div>
-        <h3 className="text-sm font-semibold text-white uppercase mb-4 tracking-wide">
+        <h3 className="text-sm font-semibold text-white uppercase mb-6 tracking-wide">
           Monthly Earning
         </h3>
         <div className="flex flex-col md:flex-row justify-between items-start gap-4">
           {/* Column 1: Earning Info */}
           <div className="flex-1 flex flex-col items-start">
             <div className="mb-4">
-              <p className="text-xs text-[#c3cbe4] mb-2 tracking-wide">
+              <p className="text-xs text-[#c3cbe4] mb-4 tracking-wide">
                 This month
               </p>
-              <p className="text-2xl poppins-medium text-white tracking-wide">
+              <p className="text-2xl mb-2 poppins-medium text-white tracking-wide">
                 $34,252
               </p>
-              <p className="text-sm mt-1">
+              <p className="text-sm mb-4">
                 <span className="text-green-500 font-medium tracking-wide">
                   12% ↑
                 </span>{" "}
@@ -100,7 +100,7 @@ const MonthlyEarningCard = () => {
               </p>
             </div>
             {/* View More Button */}
-            <button className="bg-[#5C67F2] hover:bg-[#4A55D2] text-white py-2 px-3 rounded-sm flex items-center justify-center transition duration-300 ease-in-out text-xs font-medium tracking-wide">
+            <button className="text-view-more bg-[#556ee6] hover:bg-[#4A55D2] text-white py-1.5 px-2 rounded-sm flex items-center justify-center transition duration-300 ease-in-out text-xs font-medium tracking-wide">
               View More
               <FaArrowRight className="ml-2" />
             </button>
@@ -157,7 +157,7 @@ const MonthlyEarningCard = () => {
         </div>
 
         {/* Tagline */}
-        <p className="text-xs text-[#c3cbe4] tracking-wide mt-4">
+        <p className="text-xs text-[#c3cbe4] tracking-wide">
           We craft digital, graphic and dimensional thinking.
         </p>
       </div>

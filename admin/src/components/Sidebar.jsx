@@ -137,7 +137,7 @@ export default function Sidebar() {
             sx={[
               open ? { opacity: 1 } : { opacity: 0 },
               { color: isActive(item.path) ? "#fff" : "#a6b0cf" },
-              { "& .MuiTypography-root": { fontSize: "0.95rem" } },
+              { "& .MuiTypography-root": { fontSize: "13px" } },
             ]}
           />
           {hasChildren &&
@@ -189,7 +189,7 @@ export default function Sidebar() {
                       sx={[
                         open ? { opacity: 1 } : { opacity: 0 },
                         { color: isActive(child.path) ? "#fff" : "#a6b0cf" },
-                        { "& .MuiTypography-root": { fontSize: "1rem" } },
+                        { "& .MuiTypography-root": { fontSize: "13px" } },
                       ]}
                     />
                   </ListItemButton>
@@ -215,7 +215,7 @@ export default function Sidebar() {
         sx={{
           "& .MuiDrawer-paper": {
             backgroundColor: "#2a3042",
-            width: open ? 240 : 65,
+            width: open ? 250 : 65,
             boxSizing: "border-box",
             color: "#fff",
             zIndex: isBelow992px ? 1300 : 1200,
@@ -241,9 +241,9 @@ export default function Sidebar() {
                   <ListSubheader
                     key={item.title}
                     sx={{
-                      color: "#7f8387",
+                      color: "#6a7187",
                       backgroundColor: "#2a3042",
-                      fontSize: "0.85rem",
+                      fontSize: "13px",
                       fontWeight: 500,
                       textTransform: "uppercase",
                       letterSpacing: "0.5px",

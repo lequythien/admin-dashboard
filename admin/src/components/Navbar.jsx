@@ -56,6 +56,7 @@ const Search = styled("div")(({ theme }) => ({
   marginRight: theme.spacing(2),
   marginLeft: theme.spacing(2),
   width: "100%",
+  height: "40px",
   [theme.breakpoints.up("md")]: {
     width: "auto",
   },
@@ -72,18 +73,21 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "#94a3b8",
+  color: "#c3cbe4",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "#e2e8f0",
+  color: "#c3cbe4",
+  height: "100%",
+  width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    height: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "25ch",
+      width: "20ch",
     },
   },
 }));
@@ -188,30 +192,35 @@ export default function Navbar() {
       onClose={handleMenuClose}
       PaperProps={{
         style: {
-          backgroundColor: "#2d3748",
-          color: "#e2e8f0",
+          backgroundColor: "#2a3042",
+          color: "#a6b0cf",
           borderRadius: "8px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-          width: 200,
+          width: 170,
         },
       }}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <LuUser className="mr-2" /> {t("profile")}
+      <MenuItem onClick={handleMenuClose} className="hover:text-white">
+        <LuUser className="mr-2" />
+        <span className="text-xs">{t("profile")}</span>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <BiWallet className="mr-2" /> {t("myWallet")}
+      <MenuItem onClick={handleMenuClose} className="hover:text-white">
+        <BiWallet className="mr-2" />
+        <span className="text-xs">{t("myWallet")}</span>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <LuWrench className="mr-2" /> {t("settings")}
+      <MenuItem onClick={handleMenuClose} className="hover:text-white">
+        <LuWrench className="mr-2" />
+        <span className="text-xs">{t("settings")}</span>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <LuLockKeyholeOpen className="mr-2" /> {t("lockScreen")}
+      <MenuItem onClick={handleMenuClose} className="hover:text-white">
+        <LuLockKeyholeOpen className="mr-2" />
+        <span className="text-xs">{t("lockScreen")}</span>
       </MenuItem>
-      <hr className="border-gray-600" />
+      <hr className="border-[#32394e]" />
       <NavLink to="/auth">
-        <MenuItem onClick={handleMenuClose}>
-          <RiLogoutCircleRLine className="mr-2 text-red-400" /> {t("logout")}
+        <MenuItem onClick={handleMenuClose} className="hover:text-white">
+          <RiLogoutCircleRLine className="mr-2 text-red-400" />
+          <span className="text-xs my-2">{t("logout")}</span>
         </MenuItem>
       </NavLink>
     </Menu>
@@ -455,7 +464,7 @@ export default function Navbar() {
                   alignItems: "center",
                   width: {
                     xs: "auto",
-                    md: dopen && !isBelow992px ? "15rem" : "4rem",
+                    md: dopen && !isBelow992px ? "15.6rem" : "4rem",
                   },
                   justifyContent: { xs: "space-between", md: "center" },
                 }}
@@ -480,7 +489,7 @@ export default function Navbar() {
                     <img
                       src={LogoIconMobile}
                       alt="Logo Mobile"
-                      className="h-8 w-auto"
+                      className="h-6 w-auto"
                     />
                   </Box>
                 </div>
@@ -496,7 +505,10 @@ export default function Navbar() {
               aria-label="open drawer"
               onClick={() => updateOpen(!dopen)}
             >
-              <MenuIcon sx={{ fontSize: { xs: "1.5rem", md: "1.75rem" } }} />
+              <MenuIcon
+                sx={{ fontSize: { xs: "1.2rem", md: "1.4rem" } }}
+                className="text-[#a6b0cf] ml-3"
+              />
             </IconButton>
           </Box>
 
@@ -549,7 +561,7 @@ export default function Navbar() {
                 "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
               }}
             >
-              <MdOutlineDashboardCustomize />
+              <MdOutlineDashboardCustomize className="text-[#a6b0cf]" />
             </IconButton>
 
             <IconButton
@@ -573,7 +585,7 @@ export default function Navbar() {
                     ease: "easeInOut",
                   }}
                 >
-                  <FaBell className="text-gray-400 text-lg" />
+                  <FaBell className="text-[#a6b0cf] text-lg" />
                 </motion.div>
               </Badge>
             </IconButton>
@@ -587,7 +599,6 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
               sx={{
-                "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
                 display: "flex",
                 alignItems: "center",
                 gap: 1,
@@ -598,7 +609,7 @@ export default function Navbar() {
                 alt="User Avatar"
                 className="w-8 h-8 rounded-full object-cover"
               />
-              <span className="text-gray-300 text-sm flex items-center">
+              <span className="text-[#a6b0cf] text-xs flex items-center">
                 admin <RiArrowDropDownLine className="text-xl text-gray-400" />
               </span>
             </IconButton>
@@ -614,7 +625,7 @@ export default function Navbar() {
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               >
-                <IoSettingsOutline />
+                <IoSettingsOutline className="text-[#a6b0cf]" />
               </motion.div>
             </IconButton>
           </Box>
