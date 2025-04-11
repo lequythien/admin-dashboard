@@ -329,6 +329,7 @@ export default function Navbar() {
           borderRadius: "8px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           width: "300px",
+          height: "auto",
         },
       }}
     >
@@ -348,8 +349,9 @@ export default function Navbar() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              "&:hover": { backgroundColor: "#374151" },
+              "&:hover": { border: "2px solid #32394e" },
               py: 1,
+              px: 0,
             }}
           >
             <img src={app.icon} alt={app.name} className="h-6 w-auto mb-2" />
@@ -438,7 +440,7 @@ export default function Navbar() {
               borderBottom:
                 index < notifications.length - 1 ? "1px solid #32394e" : "none",
               alignItems: "flex-start",
-              whiteSpace: "normal", // Cho phép xuống dòng
+              whiteSpace: "normal",
               wordBreak: "break-word",
             }}
           >

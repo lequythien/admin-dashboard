@@ -209,8 +209,8 @@ export default function DataTable() {
           <h1 className="text-sm sm:text-sm  md:text-base poppins-semibold">
             DATA TABLES
           </h1>
-          <div className="poppins-regular text-gray-400 text-xs sm:text-xs">
-            <a href="#" className="mr-2 text-white hover:underline">
+          <div className="poppins-regular text-gray-400 text-xs">
+            <a href="#" className="mr-2 text-white">
               Tables
             </a>
             <span className="text-[#a6b0cf]">/ Data Tables</span>

@@ -175,7 +175,7 @@ const Dashboard = () => {
                 setData(weekData);
                 setActiveView("week");
               }}
-              className={`px-3 py-1 text-xs md:text-sm rounded ${
+              className={`px-3 py-1 text-xs  md:text-sm rounded ${
                 activeView === "week" ? "bg-[#556ee6]" : ""
               }`}
             >
@@ -186,7 +186,7 @@ const Dashboard = () => {
                 setData(monthData);
                 setActiveView("month");
               }}
-              className={`px-3 py-1 text-xs md:text-sm rounded ${
+              className={`px-3 py-1 text-xs  md:text-sm rounded ${
                 activeView === "month" ? "bg-[#556ee6]" : ""
               }`}
             >
@@ -197,9 +197,10 @@ const Dashboard = () => {
                 setData(yearData);
                 setActiveView("year");
               }}
-              className={`px-3 py-1 text-xs md:text-sm rounded ${
-                activeView === "year" ? "bg-[#556ee6]" : ""
-              }`}
+              className={`px-3 py-1 text-xs 
+                 md:text-sm rounded ${
+                   activeView === "year" ? "bg-[#556ee6]" : ""
+                 }`}
             >
               Year
             </button>
