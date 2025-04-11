@@ -204,25 +204,25 @@ export default function DataTable() {
 
   return (
     <div className="text-white h-full">
-      <div className="pt-12 sm:pt-16">
+      <div className="pt-8 sm:pt-12 px-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
-          <h1 className="text-base sm:text-lg md:text-xl font-bold">
-            DATA TABLE
+          <h1 className="text-sm sm:text-sm  md:text-base poppins-semibold">
+            DATA TABLES
           </h1>
-          <div className="text-gray-400 text-xs sm:text-sm">
+          <div className="poppins-regular text-gray-400 text-xs sm:text-xs">
             <a href="#" className="mr-2 text-white hover:underline">
               Tables
             </a>
-            <span className="text-[#a6b0cf]">/ Data Table</span>
+            <span className="text-[#a6b0cf]">/ Data Tables</span>
           </div>
         </div>
         <div className="mb-4">
           <input
             type="text"
-            placeholder={`Search ${totalItems} records...`}
+            placeholder={`${totalItems} records...`}
             value={searchTerm}
             onChange={handleSearch}
-            className="p-2 pl-3 w-full border border-gray-600 outline-none bg-[#2a3042] rounded-sm text-xs sm:text-sm text-white placeholder-[#a6b0cf]"
+            className="p-2 pl-3 w-full sm:w-96 border border-gray-600 outline-none bg-[#2a3042] rounded-sm text-xs sm:text-sm text-white placeholder-[#a6b0cf]"
           />
         </div>
         <div className="bg-gray-800 overflow-hidden rounded-lg shadow-lg">
@@ -244,7 +244,9 @@ export default function DataTable() {
                       onClick={() => handleSort(column.key)}
                     >
                       <div className="flex justify-between items-center">
-                        <span>{column.label}</span>
+                        <span className="poppins-semibold text-xs">
+                          {column.label}
+                        </span>
                         <span className="inline-block align-middle">
                           {sortConfig.key === column.key &&
                           sortConfig.direction === "descending" ? (
@@ -262,7 +264,7 @@ export default function DataTable() {
                 {currentData.map((row, index) => (
                   <tr
                     key={index}
-                    className="bg-[#2a3042] border-t border-gray-700 text-xs sm:text-sm text-[#a6b0cf] hover:bg-gray-700"
+                    className="bg-[#2a3042] border-t border-gray-700 text-xs text-[#a6b0cf] hover:bg-gray-700"
                   >
                     <td className="p-2 sm:p-3 whitespace-nowrap">{row.name}</td>
                     <td className="p-2 sm:p-3 whitespace-nowrap">
@@ -285,7 +287,7 @@ export default function DataTable() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center mt-4 mb-6 text-gray-400 gap-2">
-          <span className="text-xs sm:text-sm text-[#a6b0cf]">
+          <span className="text-xs text-[#a6b0cf]">
             Showing {Math.min(endIndex, totalItems)} of {totalItems} results
           </span>
           <div className="flex space-x-1 sm:space-x-2">

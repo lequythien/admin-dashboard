@@ -101,7 +101,7 @@ const Chat = () => {
           text: "Hi, How are you? What about our next meeting?",
           time: "10:02",
         },
-        { ATTLEBOROUGH: "You", text: "Yeah everything is fine", time: "10:06" },
+        { sender: "You", text: "Yeah everything is fine", time: "10:06" },
         {
           sender: "Adam Miller",
           text: "& Next meeting tomorrow 10.00AM",
@@ -480,7 +480,7 @@ const Chat = () => {
           <a href="#" className="text-xs">
             Skote
           </a>
-          <span className="text-xs mx-2">/</span>
+          <span className="text-xs mx-2 text-[#a6b0cf]">/</span>
           <span className="text-[#a6b0cf]">Chat</span>
         </div>
       </div>

@@ -235,33 +235,46 @@ const LatestTransaction = () => {
   return (
     <div className="py-4 sm:py-6 px-0 sm:px-0 lg:px-0">
       <div className="bg-[#2a3042] p-4 sm:p-6 rounded-md">
-        <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-white">
+        <h2 className="text-icon-social font-semibold mb-4 sm:mb-8 text-white">
           Latest Transaction
         </h2>
         <div className="relative overflow-x-auto">
           <div className="custom-scrollbar-container overflow-x-auto custom-scrollbar">
             <table className="w-full text-left table-auto min-w-[800px]">
               <thead>
-                <tr className="text-[#a6b0cf] bg-[#32394e] text-[10px] sm:text-xs md:text-sm uppercase whitespace-nowrap">
+                <tr className="text-icon-social text-[#a6b0cf] bg-[#32394e] text-[10px] sm:text-xs md:text-sm uppercase whitespace-nowrap ">
                   <th className="p-2 sm:p-3">
                     <input
                       type="checkbox"
                       className="form-checkbox h-3 w-3 border border-gray-600 rounded-sm text-blue-500 bg-transparent"
                     />
                   </th>
-                  <th className="p-2 sm:p-3">Order ID</th>
-                  <th className="p-2 sm:p-3">Billing Name</th>
-                  <th className="p-2 sm:p-3">Date</th>
-                  <th className="p-2 sm:p-3">Total</th>
-                  <th className="p-2 sm:p-3">Payment Status</th>
-                  <th className="p-2 sm:p-3">Payment Method</th>
-                  <th className="p-2 sm:p-3">View Details</th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">
+                    Order ID
+                  </th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">
+                    Billing Name
+                  </th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">Date</th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">Total</th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">
+                    Payment Status
+                  </th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">
+                    Payment Method
+                  </th>
+                  <th className="text-xs p-2 sm:p-3 poppins-semibold">
+                    View Details
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {transactions.map((transaction, index) => (
                   <React.Fragment key={index}>
-                    <tr className="hover:bg-[#32394e] text-[10px] sm:text-xs md:text-sm whitespace-nowrap">
+                    <tr
+                      className="hover:bg-[#32394e] 
+                    text-xs whitespace-nowrap"
+                    >
                       <td className="p-2 sm:p-3">
                         <input
                           type="checkbox"
@@ -282,7 +295,7 @@ const LatestTransaction = () => {
                       </td>
                       <td className="p-2 sm:p-3">
                         <span
-                          className={`px-1 sm:px-2 py-0.5 rounded text-[10px] sm:text-xs font-semibold uppercase ${
+                          className={`px-1 sm:px-1 py-0.5 rounded text-[10px] sm:text-xs font-semibold uppercase ${
                             transaction.paymentStatus === "Paid"
                               ? "text-[#34C38F] bg-[#34C38F2e]"
                               : transaction.paymentStatus === "Refund"

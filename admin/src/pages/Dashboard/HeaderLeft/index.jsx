@@ -7,9 +7,9 @@ import { Box } from "@mui/material";
 // UserProfileCard Component
 const UserProfileCard = () => {
   return (
-    <div className="w-full bg-[#2a3042] rounded-sm text-white shadow-lg overflow-hidden font-sans">
+    <div className="w-full bg-[#2a3042] rounded-md text-white shadow-lg overflow-hidden font-sans">
       {/* Header */}
-      <div className="bg-[#34406b] p-4 pb-8 relative flex flex-col rounded-t-xl">
+      <div className="bg-[#34406b] p-4 pb-8 relative flex flex-col rounded-t-md">
         <h1 className="text-base pb-2 poppins-medium text-[#556ee6] tracking-wide">
           Welcome Back!
         </h1>
@@ -17,7 +17,7 @@ const UserProfileCard = () => {
         <img
           src={bg_img}
           alt="Background Illustration"
-          className="absolute right-2 top-3 w-36 h-auto md:block hidden"
+          className="absolute right-2 top-1 w-36 h-auto md:block hidden"
         />
       </div>
 
@@ -94,7 +94,7 @@ const MonthlyEarningCard = () => {
                 <span className="flex text-green-500 font-medium tracking-wide">
                   12% <FaArrowUp className="ml-1 text-xs" />
                 </span>{" "}
-                <span className="text-[#c3cbe4] tracking-wide">
+                <span className="text-xs text-[#c3cbe4] tracking-wide">
                   From previous period
                 </span>
               </p>
@@ -168,7 +168,7 @@ const MonthlyEarningCard = () => {
 // HeaderDBLeft Component
 const HeaderDBLeft = () => {
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-6">
       <UserProfileCard />
       <MonthlyEarningCard />
     </div>

@@ -144,7 +144,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="text-white p-2">
+    <div className="">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <Card
           className="bg-[#2a3042] poppins-medium"
@@ -248,14 +248,14 @@ const Dashboard = () => {
 
 const Card = ({ title, value, icon, className }) => (
   <div
-    className={`${className} p-4 md:p-6 rounded-lg shadow-lg flex justify-between items-center`}
+    className={`${className} p-6 md:p-5 rounded-lg shadow-lg flex justify-between items-center`}
   >
     <div>
-      <h3 className="text-gray-400 text-xs md:text-sm">{title}</h3>
-      <p className="text-lg md:text-xl mt-2 md:mt-3 font-semibold">{value}</p>
+      <h3 className="text-[#a6b0cf] text-xs">{title}</h3>
+      <p className="text-lg md:text-xl mt-2 md:mt-3 poppins-medium">{value}</p>
     </div>
-    <div className="bg-[#556ee6] rounded-full p-2 md:p-3">
-      <div className="text-white text-xl md:text-2xl">{icon}</div>
+    <div className="bg-[#556ee6] rounded-full p-3 md:p-3">
+      <div className="text-white text-2xl md:text-2xl">{icon}</div>
     </div>
   </div>
 );

@@ -109,6 +109,7 @@ const apps = [
   { name: "Slack", icon: Icon6 },
 ];
 
+// Updated notifications array to match the image
 const notifications = [
   {
     icon: <MdOutlineShoppingCart className="text-xl" />,
@@ -371,48 +372,140 @@ export default function Navbar() {
       onClose={handleNotifMenuClose}
       PaperProps={{
         style: {
-          backgroundColor: "#2d3748",
+          backgroundColor: "#2a3042",
           color: "#e2e8f0",
-          borderRadius: "8px",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           width: "300px",
           maxHeight: "400px",
-          overflowY: "auto",
+          display: "flex",
+          flexDirection: "column",
+          padding: 0,
         },
       }}
     >
-      <Box sx={{ p: 1, borderBottom: "1px solid #374151" }}>
-        <span className="text-sm font-medium">
-          {t("notifications")} ({notifications.length})
+      {/* Header - Fixed */}
+      <Box
+        sx={{
+          p: 1,
+          borderBottom: "1px solid #32394e",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          position: "sticky",
+          top: 0,
+          backgroundColor: "#2a3042",
+          zIndex: 1,
+        }}
+      >
+        <span className="text-sm font-medium text-white">
+          {t("notifications")}
         </span>
-      </Box>
-      {notifications.map((notif, index) => (
-        <MenuItem
-          key={index}
-          onClick={handleNotifMenuClose}
-          sx={{ "&:hover": { backgroundColor: "#374151" }, py: 1 }}
+        <a
+          href="#"
+          className="text-[#3b82f6] hover:text-[#778beb] text-xs mx-2"
         >
-          <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
-            {notif.avatar ? (
-              <img
-                src={notif.avatar}
-                alt="Avatar"
-                className="h-8 w-8 rounded-full mr-2"
-              />
-            ) : (
-              <Box sx={{ mr: 2 }}>{notif.icon}</Box>
-            )}
-            <Box>
-              <span className="text-sm font-medium">{t(notif.title)}</span>
-              <p className="text-xs text-gray-400">{notif.description}</p>
-              <p className="text-xs text-gray-500">{notif.time}</p>
+          View All
+        </a>
+      </Box>
+
+      {/* Content - Scrollable */}
+      <Box
+        sx={{
+          flex: 1,
+          overflowY: "auto",
+          height: "250px",
+          "&::-webkit-scrollbar": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#2a3042",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#a6b0cf",
+            borderRadius: "3px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#74788d",
+          },
+        }}
+      >
+        {notifications.map((notif, index) => (
+          <MenuItem
+            key={index}
+            onClick={handleNotifMenuClose}
+            sx={{
+              "&:hover": { backgroundColor: "#32394e" },
+              py: 1.5,
+              borderBottom:
+                index < notifications.length - 1 ? "1px solid #32394e" : "none",
+              alignItems: "flex-start",
+              whiteSpace: "normal", // Cho phép xuống dòng
+              wordBreak: "break-word",
+            }}
+          >
+            <Box sx={{ display: "flex", width: "100%" }}>
+              {notif.avatar ? (
+                <img
+                  src={notif.avatar}
+                  alt="Avatar"
+                  className="h-8 w-8 rounded-full mr-3"
+                />
+              ) : (
+                <Box sx={{ mr: 2, mt: "2px" }}>{notif.icon}</Box>
+              )}
+              <Box sx={{ flex: 1 }}>
+                <span
+                  className="text-sm font-medium text-white"
+                  style={{
+                    display: "block",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    maxWidth: "220px", // Giới hạn chiều ngang
+                  }}
+                >
+                  {t(notif.title)}
+                </span>
+                <p
+                  className="text-xs text-[#a6b0cf]"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 1,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    maxWidth: "220px",
+                    marginTop: "2px",
+                  }}
+                >
+                  {notif.description}
+                </p>
+                <p
+                  className="text-xs text-[#74788d]"
+                  style={{
+                    marginTop: "2px",
+                  }}
+                >
+                  {notif.time}
+                </p>
+              </Box>
             </Box>
-          </Box>
-        </MenuItem>
-      ))}
-      <Box sx={{ p: 1, borderTop: "1px solid #374151", textAlign: "center" }}>
-        <a href="#" className="text-blue-400 hover:text-blue-300 text-xs">
-          {t("viewAll")}
+          </MenuItem>
+        ))}
+      </Box>
+
+      {/* Footer - Fixed */}
+      <Box
+        sx={{
+          p: 1,
+          borderTop: "1px solid #32394e",
+          textAlign: "center",
+          position: "sticky",
+          bottom: 0,
+          backgroundColor: "#2a3042",
+          zIndex: 1,
+        }}
+      >
+        <a href="#" className="text-[#3b82f6] hover:text-[#2563eb] text-xs">
+          View More...
         </a>
       </Box>
     </Menu>
