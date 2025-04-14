@@ -48,6 +48,7 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   boxShadow: "0 0px 0px rgba(0, 0, 0, 0.1)",
 }));
 
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "50px",
@@ -467,7 +468,7 @@ export default function Navbar() {
                     display: "block",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    maxWidth: "220px", // Giới hạn chiều ngang
+                    maxWidth: "220px",
                   }}
                 >
                   {t(notif.title)}
