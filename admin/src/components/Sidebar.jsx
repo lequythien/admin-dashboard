@@ -221,7 +221,6 @@ export default function Sidebar() {
             zIndex: isBelow992px ? 1300 : 1200,
             position: isBelow992px ? "fixed" : "relative",
             height: "100%",
-            transition: "width 0.3s ease",
           },
         }}
       >

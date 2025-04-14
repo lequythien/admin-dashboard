@@ -14,12 +14,11 @@ import MailIcon from "@mui/icons-material/Mail";
 import { useAppStore } from "../redux/appStore";
 import { LuLockKeyholeOpen, LuUser, LuWrench } from "react-icons/lu";
 import { RiArrowDropDownLine, RiLogoutCircleRLine } from "react-icons/ri";
-import { BiSearchAlt, BiWallet } from "react-icons/bi";
+import { BiBell, BiSearchAlt, BiWallet } from "react-icons/bi";
 import {
   MdOutlineDashboardCustomize,
   MdOutlineShoppingCart,
 } from "react-icons/md";
-import { FaBell } from "react-icons/fa6";
 import icon_spanish from "../assets/images/spanish.jpg";
 import icon_german from "../assets/images/german.jpg";
 import icon_italian from "../assets/images/italian.jpg";
@@ -197,31 +196,33 @@ export default function Navbar() {
           color: "#a6b0cf",
           borderRadius: "8px",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
-          width: 170,
+          width: 180,
+          padding: "4px",
+          display: "flex",
         },
       }}
     >
       <MenuItem onClick={handleMenuClose} className="hover:text-white">
-        <LuUser className="mr-2" />
+        <LuUser className="mr-1" />
         <span className="text-xs">{t("profile")}</span>
       </MenuItem>
       <MenuItem onClick={handleMenuClose} className="hover:text-white">
-        <BiWallet className="mr-2" />
+        <BiWallet className="mr-1" />
         <span className="text-xs">{t("myWallet")}</span>
       </MenuItem>
       <MenuItem onClick={handleMenuClose} className="hover:text-white">
-        <LuWrench className="mr-2" />
+        <LuWrench className="mr-1" />
         <span className="text-xs">{t("settings")}</span>
       </MenuItem>
       <MenuItem onClick={handleMenuClose} className="hover:text-white">
-        <LuLockKeyholeOpen className="mr-2" />
+        <LuLockKeyholeOpen className="mr-1" />
         <span className="text-xs">{t("lockScreen")}</span>
       </MenuItem>
-      <hr className="border-[#32394e]" />
+      <hr className="border-[#32394e] my-2" />
       <NavLink to="/auth">
         <MenuItem onClick={handleMenuClose} className="hover:text-white">
-          <RiLogoutCircleRLine className="mr-2 text-red-400" />
-          <span className="text-xs my-2">{t("logout")}</span>
+          <RiLogoutCircleRLine className="mr-1 text-red-400" />
+          <span className="text-xs">{t("logout")}</span>
         </MenuItem>
       </NavLink>
     </Menu>
@@ -261,7 +262,7 @@ export default function Navbar() {
           color="inherit"
         >
           <Badge badgeContent={notifications.length} color="error">
-            <FaBell />
+            <BiBell />
           </Badge>
         </IconButton>
         <p>{t("notifications")}</p>
@@ -680,7 +681,7 @@ export default function Navbar() {
                     ease: "easeInOut",
                   }}
                 >
-                  <FaBell className="text-[#a6b0cf] text-lg" />
+                  <BiBell className="text-[#a6b0cf] text-2xl" />
                 </motion.div>
               </Badge>
             </IconButton>
@@ -786,7 +787,7 @@ export default function Navbar() {
                     ease: "easeInOut",
                   }}
                 >
-                  <FaBell className="text-gray-400 text-lg" />
+                  <BiBell className="text-gray-400 text-2xl" />
                 </motion.div>
               </Badge>
             </IconButton>
