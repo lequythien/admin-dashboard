@@ -88,6 +88,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
+    "&::placeholder": {
+      color: "#c3cbe4",
+      opacity: 1,
+      fontSize: "13px",
+    },
   },
 }));
 
@@ -603,7 +608,7 @@ export default function Navbar() {
             >
               <MenuIcon
                 sx={{ fontSize: { xs: "1.2rem", md: "1.4rem" } }}
-                className="text-[#a6b0cf] ml-3"
+                className="text-[#a6b0cf] ml-2"
               />
             </IconButton>
           </Box>

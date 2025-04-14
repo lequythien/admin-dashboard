@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <div className="text-white bg-[#222736] min-h-screen">
+      <div className="text-white bg-[#222736] min-h-screen px-2">
         <div className="pt-16">
           <div className="w-full flex justify-between pb-6">
             <h1 className="poppins-semibold">DASHBOARD</h1>
