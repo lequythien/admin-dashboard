@@ -564,7 +564,7 @@ export default function Navbar() {
                   display: "flex",
                   alignItems: "center",
                   width: {
-                    xs: "auto",
+                    xs: "2rem",
                     md: dopen && !isBelow992px ? "15.6rem" : "4rem",
                   },
                   justifyContent: { xs: "space-between", md: "center" },
