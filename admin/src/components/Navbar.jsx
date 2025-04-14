@@ -48,7 +48,6 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
   boxShadow: "0 0px 0px rgba(0, 0, 0, 0.1)",
 }));
 
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "50px",
@@ -565,7 +564,7 @@ export default function Navbar() {
                   display: "flex",
                   alignItems: "center",
                   width: {
-                    xs: "2rem",
+                    xs: "auto",
                     md: dopen && !isBelow992px ? "15.6rem" : "4rem",
                   },
                   justifyContent: { xs: "space-between", md: "center" },
