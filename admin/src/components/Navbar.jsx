@@ -224,7 +224,7 @@ export default function Navbar() {
         <span className="text-xs">{t("lockScreen")}</span>
       </MenuItem>
       <hr className="border-[#32394e] my-2" />
-      <NavLink to="/auth">
+      <NavLink to="/login">
         <MenuItem onClick={handleMenuClose} className="hover:text-white">
           <RiLogoutCircleRLine className="mr-1 text-red-400" />
           <span className="text-xs">{t("logout")}</span>

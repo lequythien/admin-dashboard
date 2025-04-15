@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaSearch, FaCog, FaEllipsisH } from "react-icons/fa";
 import { BiBell, BiSearchAlt } from "react-icons/bi";
 import { IoMdSend } from "react-icons/io";
+import { MdAccessTime } from "react-icons/md";
 import Avatar from "../images/avatar.jpg";
 import Img_recent1 from "../images/notif-icon1.jpg";
 import Img_recent2 from "../images/notif-icon2.jpg";
@@ -9,12 +10,32 @@ import Img_recent4 from "../images/notif-icon4.jpg";
 import Img_recent6 from "../images/notif-icon6.jpg";
 import Footer from "../../components/Footer";
 import { motion } from "framer-motion";
-import { MdAccessTime } from "react-icons/md";
+
+// Add this CSS to your stylesheet (e.g., index.css or a dedicated CSS file)
+const customScrollbarStyles = `
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 2px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+`;
+
+// Inject the styles into the document (if not using a separate CSS file)
+const styleSheet = document.createElement("style");
+styleSheet.innerText = customScrollbarStyles;
+document.head.appendChild(styleSheet);
 
 const Chat = () => {
   const [activeTab, setActiveTab] = useState("Chat");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  // Khởi tạo selectedChat với chat của Steven Franklin
   const [selectedChat, setSelectedChat] = useState({
     name: "Steven Franklin",
     message: "Hey! there I'm available",
@@ -43,7 +64,8 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isChatLoading, setIsChatLoading] = useState(false);
 
-  // Simulate loading for tabs and chat area
+  const chatContainerRef = useRef(null);
+
   useEffect(() => {
     setIsLoading(true);
     const timer = setTimeout(() => {
@@ -61,6 +83,13 @@ const Chat = () => {
       return () => clearTimeout(timer);
     }
   }, [selectedChat, selectedGroup, selectedContact]);
+
+  useEffect(() => {
+    if (!isChatLoading && chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [isChatLoading, selectedChat, selectedGroup, selectedContact]);
 
   const chats = [
     {
@@ -485,8 +514,9 @@ const Chat = () => {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row flex-1 overflow-hidden mt-6 px-4 sm:px-2">
-        <div className="w-full lg:w-1/3 flex flex-col pr-0 lg:pr-4 mb-4 lg:mb-0">
+      <div className="flex flex-col lg:flex-row flex-1 overflow-hidden gap-2 mt-6 px-4 sm:px-2">
+        {/* Left Column: Chat List */}
+        <div className="w-full lg:w-1/3 flex flex-col pr-0 lg:pr-4 mb-4 lg:mb-0 h-full">
           <div className="flex items-center justify-between py-6">
             <div className="flex items-center space-x-3">
               <img src={Avatar} alt="User" className="w-8 h-8 rounded-full" />
@@ -591,12 +621,12 @@ const Chat = () => {
                 {activeTab === "Chat" && (
                   <>
                     <h1 className="text-sm poppins-medium mb-3">Recent</h1>
-                    <div className="max-h-[24rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                    <div className="max-h-[24rem] overflow-y-auto custom-scrollbar">
                       {filteredChats.map((chat, index) => (
                         <div
                           key={index}
                           onClick={() => handleChatSelect(chat)}
-                          className={`flex items-center gap-3 py-4 px-4 p-3 hover:bg-gray-600 cursor-pointer transition-colors border-b border-[#32394e] ${
+                          className={`flex items-center gap-3 py-5 px-4 p-3 hover:bg-gray-600 cursor-pointer transition-colors border-b border-[#32394e] ${
                             selectedChat === chat ? "bg-gray-600" : ""
                           }`}
                         >
@@ -645,7 +675,7 @@ const Chat = () => {
                 {activeTab === "Groups" && (
                   <>
                     <h1 className="text-lg font-semibold mb-3">Group</h1>
-                    <div className="max-h-[18rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                    <div className="max-h-[24rem] overflow-y-auto custom-scrollbar">
                       {filteredGroups.map((group, index) => (
                         <div
                           key={index}
@@ -676,7 +706,7 @@ const Chat = () => {
                 {activeTab === "Contacts" && (
                   <>
                     <h1 className="text-base font-semibold mb-3">Contact</h1>
-                    <div className="max-h-[18rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+                    <div className="max-h-[24rem] overflow-y-auto custom-scrollbar">
                       {Object.entries(
                         filteredContacts.reduce((acc, contact) => {
                           const initial = contact.name[0].toUpperCase();
@@ -720,8 +750,9 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-2/3 flex flex-col bg-[#2a3042] rounded-sm px-2 py-1">
-          <div className="flex justify-between items-center px-4 py-4 border-b border-[#32394e]">
+        {/* Right Column: Chat Messages */}
+        <div className="w-full lg:w-2/3 flex flex-col bg-[#2a3042] rounded-sm h-full">
+          <div className="flex justify-between items-center px-4 py-6 border-b border-[#32394e]">
             <div>
               <h1 className="name-user-chat poppins-medium">
                 {selectedChat?.name ||
@@ -730,9 +761,9 @@ const Chat = () => {
                   "Select a chat"}
               </h1>
               {(selectedChat || selectedContact) && (
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-1 pt-1">
                   <span
-                    className={`w-2 h-2 rounded-full ${
+                    className={`w-2.5 h-2.5 rounded-full ${
                       (selectedChat?.status || selectedContact?.status) ===
                       "Active now"
                         ? "bg-green-500"
@@ -795,7 +826,10 @@ const Chat = () => {
               </button>
             </div>
           </div>
-          <div className="flex-1 p-4 max-h-[30rem] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+          <div
+            className="flex-1 p-4 max-h-[32rem] overflow-y-auto custom-scrollbar"
+            ref={chatContainerRef}
+          >
             {selectedChat ? (
               isChatLoading ? (
                 <Loader />
@@ -822,7 +856,7 @@ const Chat = () => {
                           {msg.text}
                         </p>
                         <span className="flex items-center time-chat text-gray-400">
-                          <MdAccessTime className=" mr-1" />
+                          <MdAccessTime className="mr-1" />
                           {msg.time}
                         </span>
                       </div>

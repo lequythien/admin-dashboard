@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const ActivityPanel = () => {
   return (
-    <div className="bg-[#2a3042] p-8 rounded-md shadow-lg w-full">
+    <div className="bg-[#2a3042] p-5 rounded-md shadow-lg w-full">
       <h3 className="text-sm font-semibold text-white uppercase mb-4">
         Activity
       </h3>

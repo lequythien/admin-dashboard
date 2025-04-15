@@ -6,8 +6,10 @@ import Box from "@mui/material/Box";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Chat from "./pages/Chat/Chat";
 import DataTables from "./pages/Tables/DataTables";
-import Auth from "./pages/Auth";
+// import Auth from "./pages/Auth";
 import { useAppStore } from "./redux/appStore";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 
 const App = () => {
   const open = useAppStore((state) => state.dopen);
@@ -15,7 +17,10 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/auth" element={<Auth />} />
+        {/* <Route path="/auth" element={<Auth />} /> */}
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route
           path="/*"

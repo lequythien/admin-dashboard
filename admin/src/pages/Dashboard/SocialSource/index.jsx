@@ -4,7 +4,7 @@ import { MdOutlineNavigateNext } from "react-icons/md";
 
 const SocialSource = () => {
   return (
-    <div className="bg-[#2a3042] p-6 rounded-md shadow-lg w-full">
+    <div className="bg-[#2a3042] p-5 rounded-md shadow-lg w-full">
       <h3 className="text-sm font-semibold text-white uppercase mb-4">
         Social Source
       </h3>

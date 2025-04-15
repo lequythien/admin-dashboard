@@ -3,7 +3,7 @@ import { PiMapPinSimpleAreaBold } from "react-icons/pi";
 
 const TopCitiesSellingProduct = () => {
   return (
-    <div className="bg-[#2a3042] p-6 rounded-lg shadow-lg">
+    <div className="bg-[#2a3042] p-5 rounded-lg shadow-lg">
       <h3 className="text-sm font-semibold text-white uppercase mb-4">
         Top Cities Selling Product
       </h3>

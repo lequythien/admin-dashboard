@@ -1,130 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import { FaSpinner } from "react-icons/fa";
+import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import Footer from "../../components/Footer";
-
-const initialData = [
-  {
-    name: "Jennifer Chang",
-    position: "Regional Director",
-    office: "Singapore",
-    age: 28,
-    startDate: "2010/11/14",
-    salary: "$337,650",
-  },
-  {
-    name: "Gavin Joyce",
-    position: "Developer",
-    office: "Edinburgh",
-    age: 42,
-    startDate: "2010/12/22",
-    salary: "$92,575",
-  },
-  {
-    name: "Angelica Ramos",
-    position: "Chief Executive Officer (CEO)",
-    office: "London",
-    age: 47,
-    startDate: "2009/10/09",
-    salary: "$1,200,000",
-  },
-  {
-    name: "Doris Wilder",
-    position: "Sales Assistant",
-    office: "Sidney",
-    age: 23,
-    startDate: "2010/09/20",
-    salary: "$85,600",
-  },
-  {
-    name: "Caesar Vance",
-    position: "Pre-Sales Support",
-    office: "New York",
-    age: 21,
-    startDate: "2011/12/22",
-    salary: "$106,450",
-  },
-  {
-    name: "Yuri Berry",
-    position: "Chief Marketing Officer (CMO)",
-    office: "New York",
-    age: 40,
-    startDate: "2009/06/25",
-    salary: "$675,000",
-  },
-  {
-    name: "Michael Silva",
-    position: "Marketing Designer",
-    office: "London",
-    age: 66,
-    startDate: "2012/11/27",
-    salary: "$198,500",
-  },
-  {
-    name: "Ashton Cox",
-    position: "Junior Technical Author",
-    office: "San Francisco",
-    age: 66,
-    startDate: "2009/01/12",
-    salary: "$86,000",
-  },
-  {
-    name: "Paul Byrd",
-    position: "Chief Financial Officer (CFO)",
-    office: "New York",
-    age: 64,
-    startDate: "2010/06/09",
-    salary: "$725,000",
-  },
-  {
-    name: "Garrett Winters",
-    position: "Accountant",
-    office: "Tokyo",
-    age: 63,
-    startDate: "2011/07/25",
-    salary: "$170,750",
-  },
-  {
-    name: "Brielle Williamson",
-    position: "Integration Specialist",
-    office: "New York",
-    age: 62,
-    startDate: "2012/12/02",
-    salary: "$372,000",
-  },
-  {
-    name: "Tiger Nixon",
-    position: "System Architect",
-    office: "Edinburgh",
-    age: 61,
-    startDate: "2011/04/25",
-    salary: "$320,800",
-  },
-  {
-    name: "Gloria Little",
-    position: "Systems Administrator",
-    office: "New York",
-    age: 59,
-    startDate: "2009/04/10",
-    salary: "$237,500",
-  },
-  {
-    name: "Herrod Chandler",
-    position: "Sales Assistant",
-    office: "San Francisco",
-    age: 59,
-    startDate: "2012/08/06",
-    salary: "$137,500",
-  },
-  {
-    name: "Rhona Davidson",
-    position: "Integration Specialist",
-    office: "Tokyo",
-    age: 55,
-    startDate: "2010/10/14",
-    salary: "$327,900",
-  },
-];
 
 export default function DataTable() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -134,9 +13,139 @@ export default function DataTable() {
     key: null,
     direction: "ascending",
   });
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentRecord, setCurrentRecord] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    position: "",
+    office: "",
+    age: "",
+    startDate: "",
+    salary: "",
+  });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State cho modal xóa
+  const [recordToDelete, setRecordToDelete] = useState(null); // Lưu id bản ghi cần xóa
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("https://dummyjson.com/users");
+        const result = await response.json();
+        const formattedData = result.users.map((user) => ({
+          id: user.id,
+          name: `${user.firstName} ${user.lastName}`,
+          position: user.company?.title || "N/A",
+          office: user.company?.department || "N/A",
+          age: user.age,
+          startDate: user.birthDate || "N/A",
+          salary: `$${user.salary || Math.floor(Math.random() * 1000000).toLocaleString()}`,
+        }));
+        setData(formattedData);
+        setLoading(false);
+      } catch (err) {
+        setError("Failed to fetch data");
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const openModal = (record = null) => {
+    setCurrentRecord(record);
+    setFormData(
+      record || {
+        name: "",
+        position: "",
+        office: "",
+        age: "",
+        startDate: "",
+        salary: "",
+      }
+    );
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentRecord(null);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setActionLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    try {
+      if (currentRecord) {
+        // Cập nhật data
+        setData((prev) =>
+          prev.map((item) =>
+            item.id === currentRecord.id
+              ? { ...item, ...formData, id: currentRecord.id }
+              : item
+          )
+        );
+      } else {
+        // Thêm data mới ở đầu danh sách
+        setData((prev) => [
+          {
+            ...formData,
+            id: Math.max(...prev.map((item) => item.id), 0) + 1,
+            salary: formData.salary.startsWith("$")
+              ? formData.salary
+              : `$${formData.salary}`,
+            age: parseInt(formData.age) || 0,
+          },
+          ...prev,
+        ]);
+      }
+      closeModal();
+    } catch (err) {
+      setError("Failed to process action");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const openDeleteModal = (id) => {
+    setRecordToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setRecordToDelete(null);
+  };
+
+  const handleDelete = async () => {
+    setActionLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    try {
+      setData((prev) => prev.filter((item) => item.id !== recordToDelete));
+      closeDeleteModal();
+    } catch (err) {
+      setError("Failed to delete data");
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   const getSortedData = () => {
-    let sortedData = [...initialData];
+    let sortedData = [...data];
 
     sortedData = sortedData.filter((row) =>
       Object.values(row).some((value) =>
@@ -164,6 +173,23 @@ export default function DataTable() {
     return sortedData;
   };
 
+  if (loading || actionLoading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-[#1a202c] bg-opacity-90 z-50">
+        <div className="flex flex-col items-center gap-4">
+          <FaSpinner className="text-blue-400 text-2xl animate-spin" />
+          <span className="text-white text-base font-semibold tracking-wide poppins-regular">
+            {loading ? "Đang tải dữ liệu..." : "Đang xử lý..."}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-red-500 text-center">{error}</div>;
+  }
+
   const sortedData = getSortedData();
   const totalItems = sortedData.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -189,9 +215,8 @@ export default function DataTable() {
     setCurrentPage(1);
   };
 
-  // Responsive pagination: Show limited pages on mobile
   const getPaginationRange = () => {
-    const maxVisiblePages = 5; // Hiển thị tối đa 5 nút trên desktop
+    const maxVisiblePages = 5;
     const range = [];
     const start = Math.max(1, currentPage - 2);
     const end = Math.min(totalPages, start + maxVisiblePages - 1);
@@ -206,7 +231,7 @@ export default function DataTable() {
     <div className="text-white h-full">
       <div className="pt-8 sm:pt-12 px-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
-          <h1 className="text-sm sm:text-sm  md:text-base poppins-semibold">
+          <h1 className="text-sm sm:text-sm md:text-base poppins-semibold">
             DATA TABLES
           </h1>
           <div className="poppins-regular text-gray-400 text-xs">
@@ -216,7 +241,7 @@ export default function DataTable() {
             <span className="text-[#a6b0cf]">/ Data Tables</span>
           </div>
         </div>
-        <div className="mb-4">
+        <div className="flex justify-between gap-2 mb-4">
           <input
             type="text"
             placeholder={`${totalItems} records...`}
@@ -224,12 +249,22 @@ export default function DataTable() {
             onChange={handleSearch}
             className="p-2 pl-3 w-full sm:w-96 border border-gray-600 outline-none bg-[#2a3042] rounded-sm text-xs sm:text-sm text-white placeholder-[#a6b0cf]"
           />
+          <button
+            onClick={() => openModal()}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded flex items-center gap-2"
+          >
+            <FaPlus />
+            <span className="text-sm">Add New</span>
+          </button>
         </div>
         <div className="bg-gray-800 overflow-hidden rounded-lg shadow-lg">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-[#2a3042] text-[#a6b0cf] text-xs sm:text-sm">
+                  <th className="p-2 sm:p-3 whitespace-nowrap">
+                    <span className="poppins-semibold text-xs">STT</span>
+                  </th>
                   {[
                     { label: "NAME", key: "name" },
                     { label: "POSITION", key: "position" },
@@ -237,24 +272,31 @@ export default function DataTable() {
                     { label: "AGE", key: "age" },
                     { label: "START DATE", key: "startDate" },
                     { label: "SALARY", key: "salary" },
+                    { label: "ACTIONS", key: "actions" },
                   ].map((column) => (
                     <th
                       key={column.key}
                       className="p-2 sm:p-3 cursor-pointer whitespace-nowrap"
-                      onClick={() => handleSort(column.key)}
+                      onClick={
+                        column.key !== "actions"
+                          ? () => handleSort(column.key)
+                          : undefined
+                      }
                     >
                       <div className="flex justify-between items-center">
                         <span className="poppins-semibold text-xs">
                           {column.label}
                         </span>
-                        <span className="inline-block align-middle">
-                          {sortConfig.key === column.key &&
-                          sortConfig.direction === "descending" ? (
-                            <TiArrowSortedUp />
-                          ) : (
-                            <TiArrowSortedDown />
-                          )}
-                        </span>
+                        {column.key !== "actions" && (
+                          <span className="inline-block align-middle">
+                            {sortConfig.key === column.key &&
+                            sortConfig.direction === "descending" ? (
+                              <TiArrowSortedUp />
+                            ) : (
+                              <TiArrowSortedDown />
+                            )}
+                          </span>
+                        )}
                       </div>
                     </th>
                   ))}
@@ -263,9 +305,12 @@ export default function DataTable() {
               <tbody>
                 {currentData.map((row, index) => (
                   <tr
-                    key={index}
+                    key={row.id}
                     className="bg-[#2a3042] border-t border-gray-700 text-xs text-[#a6b0cf] hover:bg-gray-700"
                   >
+                    <td className="p-2 sm:p-3 whitespace-nowrap">
+                      {startIndex + index + 1}
+                    </td>
                     <td className="p-2 sm:p-3 whitespace-nowrap">{row.name}</td>
                     <td className="p-2 sm:p-3 whitespace-nowrap">
                       {row.position}
@@ -279,6 +324,24 @@ export default function DataTable() {
                     </td>
                     <td className="p-2 sm:p-3 whitespace-nowrap">
                       {row.salary}
+                    </td>
+                    <td className="p-2 sm:p-3 whitespace-nowrap">
+                      <div className="flex gap-2 text-sm sm:text-base">
+                        <button
+                          onClick={() => openModal(row)}
+                          className="text-blue-500 hover:text-blue-400"
+                          title="Edit"
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          onClick={() => openDeleteModal(row.id)}
+                          className="text-red-500 hover:text-red-400"
+                          title="Delete"
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -321,6 +384,147 @@ export default function DataTable() {
           </div>
         </div>
       </div>
+
+      {/* Modal for Add/Edit */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-[#2a3042] rounded-lg w-full max-w-md flex flex-col max-h-[80vh] mt-10">
+            <div className="p-4 sm:p-6 border-b border-gray-600">
+              <h2 className="text-lg font-semibold text-white">
+                {currentRecord ? "Edit Data" : "Add New Data"}
+              </h2>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 custom-scrollbar">
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm text-[#a6b0cf] mb-1">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#1a202c] border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#a6b0cf] mb-1">
+                      Position
+                    </label>
+                    <input
+                      type="text"
+                      name="position"
+                      value={formData.position}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#1a202c] border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#a6b0cf] mb-1">
+                      Office
+                    </label>
+                    <input
+                      type="text"
+                      name="office"
+                      value={formData.office}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#1a202c] border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#a6b0cf] mb-1">
+                      Age
+                    </label>
+                    <input
+                      type="number"
+                      name="age"
+                      value={formData.age}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#1a202c] border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#a6b0cf] mb-1">
+                      Start Date
+                    </label>
+                    <input
+                      type="date"
+                      name="startDate"
+                      value={formData.startDate}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#1a202c] border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200 [&::-webkit-calendar-picker-indicator]:invert"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-[#a6b0cf] mb-1">
+                      Salary
+                    </label>
+                    <input
+                      type="text"
+                      name="salary"
+                      value={formData.salary}
+                      onChange={handleInputChange}
+                      className="w-full p-2 bg-[#1a202c] border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-200"
+                      required
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div className="p-4 sm:p-6 border-t border-gray-600 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={closeModal}
+                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded text-white text-sm transition-colors duration-200"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white text-sm transition-colors duration-200 flex items-center gap-2"
+              >
+                {currentRecord ? "Update" : "Add"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Delete Confirmation */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-[#2a3042] rounded-lg w-full max-w-sm p-4 sm:p-6">
+            <h2 className="text-lg font-semibold text-white mb-4">
+              Xác nhận xóa
+            </h2>
+            <p className="text-sm text-[#a6b0cf] mb-6">
+              Bạn có chắc chắn muốn xóa dữ liệu này không?
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={closeDeleteModal}
+                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded text-white text-sm transition-colors duration-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-white text-sm transition-colors duration-200 flex items-center gap-2"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div>
         <Footer />

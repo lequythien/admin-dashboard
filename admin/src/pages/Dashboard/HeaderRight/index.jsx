@@ -252,7 +252,7 @@ const Card = ({ title, value, icon, className }) => (
     className={`${className} p-6 md:p-5 rounded-lg shadow-lg flex justify-between items-center`}
   >
     <div>
-      <h3 className="text-[#a6b0cf] text-xs">{title}</h3>
+      <h3 className="text-[#c3cbe4] text-xs">{title}</h3>
       <p className="text-lg md:text-xl mt-2 md:mt-3 poppins-medium">{value}</p>
     </div>
     <div className="bg-[#556ee6] rounded-full p-3 md:p-3">

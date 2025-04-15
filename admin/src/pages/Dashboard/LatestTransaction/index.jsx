@@ -234,7 +234,7 @@ const LatestTransaction = () => {
 
   return (
     <div className="py-4 sm:py-6 px-0 sm:px-0 lg:px-0">
-      <div className="bg-[#2a3042] p-4 sm:p-6 rounded-md">
+      <div className="bg-[#2a3042] p-5 rounded-md">
         <h2 className="text-icon-social font-semibold mb-4 sm:mb-8 text-white">
           Latest Transaction
         </h2>
