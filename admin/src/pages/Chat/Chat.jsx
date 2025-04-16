@@ -621,7 +621,7 @@ const Chat = () => {
                 {activeTab === "Chat" && (
                   <>
                     <h1 className="text-sm poppins-medium mb-3">Recent</h1>
-                    <div className="max-h-[24rem] overflow-y-auto custom-scrollbar">
+                    <div className="max-h-[25.2rem] overflow-y-auto custom-scrollbar">
                       {filteredChats.map((chat, index) => (
                         <div
                           key={index}
