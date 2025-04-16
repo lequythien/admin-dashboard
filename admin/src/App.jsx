@@ -5,11 +5,12 @@ import Navbar from "./components/Navbar";
 import Box from "@mui/material/Box";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Chat from "./pages/Chat/Chat";
-import DataTables from "./pages/Tables/DataTables";
 // import Auth from "./pages/Auth";
 import { useAppStore } from "./redux/appStore";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import Users from "./pages/Tables/Users";
+import Post from "./pages/Tables/Post";
 
 const App = () => {
   const open = useAppStore((state) => state.dopen);
@@ -52,7 +53,8 @@ const App = () => {
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/dashboard" element={<Dashboard />} />
                       <Route path="/chat" element={<Chat />} />
-                      <Route path="/data-tables" element={<DataTables />} />
+                      <Route path="/users" element={<Users />} />
+                      <Route path="/post" element={<Post />} />
                     </Routes>
                   </Box>
                 </Box>

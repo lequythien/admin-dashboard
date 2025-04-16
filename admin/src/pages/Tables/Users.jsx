@@ -5,7 +5,7 @@ import { FaSpinner } from "react-icons/fa";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import Footer from "../../components/Footer";
 
-export default function DataTable() {
+export default function Users() {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
@@ -251,7 +251,7 @@ export default function DataTable() {
           />
           <button
             onClick={() => openModal()}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded flex items-center gap-2"
+            className="rounded bg-blue-500 px-2 py-1 text-base font-medium text-white transition duration-200 hover:bg-blue-600 active:bg-blue-700 dark:bg-blue-400 dark:text-white dark:hover:bg-blue-300 dark:active:bg-blue-200 flex items-center gap-2"
           >
             <FaPlus />
             <span className="text-sm">Add New</span>

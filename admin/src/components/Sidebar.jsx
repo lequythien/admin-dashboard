@@ -18,6 +18,7 @@ import { useAppStore } from "../redux/appStore";
 import { BiChat, BiHomeCircle } from "react-icons/bi";
 import { IoListSharp } from "react-icons/io5";
 import { BsClipboard2DataFill } from "react-icons/bs";
+import { MdOutlineContentPaste } from "react-icons/md";
 
 const NAVIGATION = [
   {
@@ -50,10 +51,16 @@ const NAVIGATION = [
     icon: <IoListSharp />,
     children: [
       {
-        segment: "data-tables",
-        title: "dataTables",
+        segment: "users",
+        title: "Users",
         icon: <BsClipboard2DataFill />,
-        path: "/data-tables",
+        path: "/users",
+      },
+      {
+        segment: "post",
+        title: "Posts",
+        icon: <MdOutlineContentPaste />,
+        path: "/post",
       },
     ],
   },
