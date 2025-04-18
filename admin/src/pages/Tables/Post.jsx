@@ -14,13 +14,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
-import CircularProgress from "@mui/material/CircularProgress";
 import Footer from "../../components/Footer";
+import { FaSpinner } from "react-icons/fa";
 
 const Post = () => {
   const [posts, setPosts] = useState([]);
@@ -52,7 +51,7 @@ const Post = () => {
         setLoading(true);
         const response = await fetch("https://dummyjson.com/posts");
         const data = await response.json();
-        setPosts(data.posts);
+        setPosts(data.posts.sort((a, b) => a.id - b.id));
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch posts");
@@ -121,7 +120,7 @@ const Post = () => {
 
     setActionLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate async action
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       if (dialogMode === "add") {
         const newPost = {
           id: posts.length + 1,
@@ -130,12 +129,14 @@ const Post = () => {
           userId: parseInt(currentPost.userId),
           reactions: { likes: 0 },
         };
-        setPosts([newPost, ...posts]);
+        setPosts([...posts, newPost].sort((a, b) => a.id - b.id));
       } else if (dialogMode === "edit") {
         setPosts(
-          posts.map((post) =>
-            post.id === currentPost.id ? { ...post, ...currentPost } : post
-          )
+          posts
+            .map((post) =>
+              post.id === currentPost.id ? { ...post, ...currentPost } : post
+            )
+            .sort((a, b) => a.id - b.id)
         );
       }
       handleCloseDialog();
@@ -159,8 +160,12 @@ const Post = () => {
   const handleDelete = async () => {
     setActionLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate async action
-      setPosts(posts.filter((post) => post.id !== postIdToDelete));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setPosts(
+        posts
+          .filter((post) => post.id !== postIdToDelete)
+          .sort((a, b) => a.id - b.id)
+      );
       handleCloseDeleteDialog();
     } catch (err) {
       setError("Failed to delete post");
@@ -290,56 +295,11 @@ const Post = () => {
     },
   }));
 
-  const StyledTextField = styled(TextField)(({ theme }) => ({
-    "& .MuiInputBase-root": {
-      backgroundColor: "#1a202c",
-      color: "#ffffff",
-      borderRadius: "0.25rem",
-      fontSize: "0.875rem",
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "0.8rem",
-      },
-    },
-    "& .MuiInputLabel-root": {
-      color: "#a6b0cf",
-      fontSize: "0.875rem",
-      "&.Mui-focused": {
-        color: "#60a5fa",
-      },
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "0.8rem",
-      },
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#4a5568",
-      },
-      "&:hover fieldset": {
-        borderColor: "#a6b0cf",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#60a5fa",
-      },
-    },
-    "& .MuiFormHelperText-root": {
-      color: "#ef4444",
-      fontSize: "0.75rem",
-      [theme.breakpoints.down("sm")]: {
-        fontSize: "0.7rem",
-      },
-    },
-  }));
-
   if (loading || actionLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-[#1a202c] bg-opacity-90 z-50">
         <div className="flex flex-col items-center gap-4">
-          <CircularProgress
-            sx={{ color: "#3b82f6" }}
-            size={24}
-            thickness={4}
-            className="animate-spin"
-          />
+          <FaSpinner className="text-blue-400 text-2xl animate-spin" />
           <span className="text-white text-base font-semibold tracking-wide poppins-regular">
             {loading ? "Đang tải dữ liệu..." : "Đang xử lý..."}
           </span>
@@ -409,8 +369,8 @@ const Post = () => {
                     <StyledTableCell>
                       {expandedRows[post.id]
                         ? post.body
-                        : truncateText(post.body, 20)}
-                      {post.body.split(" ").length > 20 && (
+                        : truncateText(post.body, 30)}
+                      {post.body.split(" ").length > 30 && (
                         <Button
                           size="small"
                           onClick={() => handleToggleExpand(post.id)}
@@ -496,46 +456,51 @@ const Post = () => {
           {dialogMode === "add" ? "Thêm bài viết" : "Sửa bài viết"}
         </DialogTitle>
         <DialogContent sx={{ padding: { xs: "16px", sm: "24px" } }}>
-          <StyledTextField
-            margin="dense"
-            label="Title"
-            name="title"
-            value={currentPost.title}
-            onChange={handleInputChange}
-            fullWidth
-            error={!!formErrors.title}
-            helperText={formErrors.title}
-          />
-          <StyledTextField
-            margin="dense"
-            label="Body"
-            name="body"
-            value={currentPost.body}
-            onChange={handleInputChange}
-            fullWidth
-            multiline
-            rows={4}
-            error={!!formErrors.body}
-            helperText={formErrors.body}
-          />
-          <StyledTextField
-            margin="dense"
-            label="User ID"
-            name="userId"
-            type="number"
-            value={currentPost.userId}
-            onChange={handleInputChange}
-            fullWidth
-            error={!!formErrors.userId}
-            helperText={formErrors.userId}
-          />
+          <div className="mb-4">
+            <label className="block text-sm text-[#a6b0cf] mb-1">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={currentPost.title}
+              onChange={handleInputChange}
+              className="w-full bg-[#1a202c] text-white border border-[#4a5568] rounded-md px-3 py-2 text-sm focus:border-[#60a5fa] focus:outline-none"
+            />
+            {formErrors.title && (
+              <p className="text-[#ef4444] text-xs mt-1">{formErrors.title}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm text-[#a6b0cf] mb-1">Body</label>
+            <textarea
+              name="body"
+              value={currentPost.body}
+              onChange={handleInputChange}
+              rows={4}
+              className="w-full bg-[#1a202c] text-white border border-[#4a5568] rounded-md px-3 py-2 text-sm focus:border-[#60a5fa] focus:outline-none resize-y"
+            />
+            {formErrors.body && (
+              <p className="text-[#ef4444] text-xs mt-1">{formErrors.body}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm text-[#a6b0cf] mb-1">User ID</label>
+            <input
+              type="number"
+              name="userId"
+              value={currentPost.userId}
+              onChange={handleInputChange}
+              className="w-full bg-[#1a202c] text-white border border-[#4a5568] rounded-md px-3 py-2 text-sm focus:border-[#60a5fa] focus:outline-none"
+            />
+            {formErrors.userId && (
+              <p className="text-[#ef4444] text-xs mt-1">{formErrors.userId}</p>
+            )}
+          </div>
         </DialogContent>
         <DialogActions
           sx={{
             padding: { xs: "12px 16px", sm: "16px" },
             borderTop: "1px solid #4a5568",
             justifyContent: "flex-end",
-            gap: "8px",
           }}
         >
           <Button
@@ -546,6 +511,9 @@ const Post = () => {
               fontSize: { xs: "0.8rem", sm: "0.875rem" },
               borderRadius: "0.25rem",
               textTransform: "none",
+              padding: "8px 16px",
+              minWidth: "80px",
+              height: "36px",
               "&:hover": {
                 backgroundColor: "#6b7280",
               },
@@ -553,9 +521,24 @@ const Post = () => {
           >
             Hủy
           </Button>
-          <StyledButton onClick={handleSubmit} variant="contained">
+          <Button
+            onClick={handleSubmit}
+            sx={{
+              color: "#ffffff",
+              backgroundColor: "#3b82f6",
+              fontSize: { xs: "0.8rem", sm: "0.875rem" },
+              borderRadius: "0.25rem",
+              textTransform: "none",
+              padding: "8px 16px",
+              minWidth: "80px",
+              height: "36px",
+              "&:hover": {
+                backgroundColor: "#2563eb",
+              },
+            }}
+          >
             {dialogMode === "add" ? "Thêm" : "Lưu"}
-          </StyledButton>
+          </Button>
         </DialogActions>
       </Dialog>
 
@@ -594,7 +577,6 @@ const Post = () => {
             padding: { xs: "12px 16px", sm: "16px" },
             borderTop: "1px solid #4a5568",
             justifyContent: "flex-end",
-            gap: "8px",
           }}
         >
           <Button
